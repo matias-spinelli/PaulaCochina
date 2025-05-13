@@ -1,0 +1,8 @@
+<div class="recipe-card">
+    <img [src]="imageUrl" alt="Imagen de receta" class="recipe-image" />
+    <div class="recipe-content">
+      <h3 class="recipe-title">{{ title }}</h3>
+      <p class="recipe-description">{{ description }}</p>
+      <a [routerLink]="['/recipe', recipeId]" class="view-button">Ver receta</a>
+    </div>
+  </div>

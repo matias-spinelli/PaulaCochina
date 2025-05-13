@@ -1,0 +1,6 @@
+<div *ngIf="recipe" class="recipe-detail">
+    <img [src]="recipe.imageUrl" alt="Imagen de {{ recipe.title }}" class="detail-image" />
+    <h2 class="detail-title">{{ recipe.title }}</h2>
+    <p class="detail-description">{{ recipe.description }}</p>
+    <a routerLink="/" class="back-button">← Volver</a>
+</div>

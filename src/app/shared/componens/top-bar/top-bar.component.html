@@ -1,0 +1,19 @@
+<div class="top-bar">
+    <div class="logo">Mis Recetas</div>
+  
+    <!-- Botón hamburguesa (visible en móviles) -->
+    <div class="hamburger" (click)="toggleMenu()">
+      <div class="bar"></div>
+      <div class="bar"></div>
+      <div class="bar"></div>
+    </div>
+  
+    <!-- Navegación -->
+    <div class="nav-links" [class.open]="isMenuOpen">
+      <a href="#">Inicio</a>
+      <a href="#">Recetas</a>
+      <a href="#">Favoritos</a>
+      <a href="#">Perfil</a>
+    </div>
+  </div>
+  

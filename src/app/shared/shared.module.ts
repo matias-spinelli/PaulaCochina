@@ -5,7 +5,8 @@ import { RecipesListComponent } from './componens/recipes-list/recipes-list.comp
 import { RecipeCardComponent } from './componens/recipe-card/recipe-card.component';
 import { RecipeDetailComponent } from './componens/recipe-detail/recipe-detail.component';
 import { RouterModule } from '@angular/router';
-import { UnitLabelPipe } from './pipe/unit-label.pipe';
+import { UnitLabelPipe } from './pipes/unit-label.pipe';
+import { FormatIngredientPipe } from './pipes/format-ingredient.pipe';
 
 
 
@@ -15,7 +16,8 @@ import { UnitLabelPipe } from './pipe/unit-label.pipe';
     RecipesListComponent,
     RecipeCardComponent,
     RecipeDetailComponent,
-    UnitLabelPipe
+    UnitLabelPipe,
+    FormatIngredientPipe
   ],
   imports: [
     CommonModule,
@@ -24,7 +26,8 @@ import { UnitLabelPipe } from './pipe/unit-label.pipe';
   exports: [
     TopBarComponent,
     RecipesListComponent,
-    UnitLabelPipe
+    UnitLabelPipe,
+    FormatIngredientPipe
   ]
 })
 export class SharedModule { }

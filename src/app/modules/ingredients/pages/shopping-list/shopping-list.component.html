@@ -1,9 +1,20 @@
 <div class="shopping-list">
-    <h2>Lista de Ingredientes</h2>
+    <h2>Lista de Ingredientes 🛒</h2>
+  
     <ul class="ingredients-list">
-      <li *ngFor="let ing of ingredients">
-        {{ ing.quantity }} {{ ing.unit | unitLabel:ing.quantity }} de {{ ing.name }}
-    </li>
+      <li *ngFor="let item of ingredients; let i = index">
+        <label class="checkbox-item">
+          <input type="checkbox" [checked]="item.checked" (change)="toggleChecked(i)" />
+          <span [class.checked]="item.checked">{{ item.ingredient | formatIngredient }}</span>
+        </label>
+      </li>
     </ul>
-    <a routerLink="/" class="back-button">← Volver al inicio</a>
-</div>
+
+    <div class="button-group">
+        <button class="reset-button" (click)="resetList()">🧼 Limpiar lista</button>
+        <button class="remove-checked-button" (click)="removeChecked()">🗑️ Borrar marcados</button>
+        <button class="restore-button" (click)="restoreOriginal()">🔁 Restaurar lista original</button>
+        <a routerLink="/" class="back-button">← Volver al inicio</a>
+    </div>
+
+  </div>

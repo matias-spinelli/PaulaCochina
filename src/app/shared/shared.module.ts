@@ -5,6 +5,7 @@ import { RecipesListComponent } from './componens/recipes-list/recipes-list.comp
 import { RecipeCardComponent } from './componens/recipe-card/recipe-card.component';
 import { RecipeDetailComponent } from './componens/recipe-detail/recipe-detail.component';
 import { RouterModule } from '@angular/router';
+import { UnitLabelPipe } from './pipe/unit-label.pipe';
 
 
 
@@ -13,7 +14,8 @@ import { RouterModule } from '@angular/router';
     TopBarComponent,
     RecipesListComponent,
     RecipeCardComponent,
-    RecipeDetailComponent
+    RecipeDetailComponent,
+    UnitLabelPipe
   ],
   imports: [
     CommonModule,
@@ -21,7 +23,8 @@ import { RouterModule } from '@angular/router';
   ],
   exports: [
     TopBarComponent,
-    RecipesListComponent
+    RecipesListComponent,
+    UnitLabelPipe
   ]
 })
 export class SharedModule { }

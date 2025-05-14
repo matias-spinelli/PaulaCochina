@@ -1,0 +1,25 @@
+.shopping-list {
+    max-width: 600px;
+    margin: 2rem auto;
+    padding: 2rem;
+    background-color: #fffdf6;
+    border-radius: 16px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    text-align: center;
+  }
+  
+  .ingredients-list {
+    list-style-type: circle;
+    padding-left: 1.5rem;
+    text-align: left;
+  }
+  
+  .back-button {
+    display: inline-block;
+    margin-top: 1.5rem;
+    background-color: #e67e22;
+    color: white;
+    padding: 0.5rem 1rem;
+    border-radius: 8px;
+    text-decoration: none;
+  }

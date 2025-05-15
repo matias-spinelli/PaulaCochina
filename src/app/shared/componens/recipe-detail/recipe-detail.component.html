@@ -1,5 +1,14 @@
 <div *ngIf="recipe" class="recipe-detail">
-    <img [src]="recipe.imageUrl" alt="Imagen de {{ recipe.title }}" class="detail-image" />
+    <div class="image-container">
+        <img [src]="recipe.imageUrl" alt="Imagen de {{ recipe.title }}" class="detail-image" />
+        <button
+          class="favorite-btn"
+          (click)="toggleFavorite()"
+          [@pop]="hasInteracted ? isFav : null"
+        >
+          {{ isFav ? '❤️' : '🤍' }}
+        </button>
+    </div>
     <h2 class="detail-title">{{ recipe.title }}</h2>
     <p class="detail-description">{{ recipe.description }}</p>
     <h3>Ingredientes</h3>

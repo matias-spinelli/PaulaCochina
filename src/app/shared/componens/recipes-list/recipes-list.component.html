@@ -1,9 +1,14 @@
-<div class="recipes-grid">
-    <app-recipe-card
-      *ngFor="let recipe of recipes"
-      [recipeId]="recipe.id"
-      [title]="recipe.title"
-      [description]="recipe.description"
-      [imageUrl]="recipe.imageUrl"
-    ></app-recipe-card>
+<div class="page-container">
+    <ng-container *ngIf="recipes.length; else emptyList">
+      <div class="recipes-grid">
+        <app-recipe-card
+          *ngFor="let recipe of recipes"
+          [recipe]="recipe">
+        </app-recipe-card>
+      </div>
+    </ng-container>
+  
+    <ng-template #emptyList>
+      <p class="empty-message">No hay recetas para mostrar 😢</p>
+    </ng-template>
   </div>

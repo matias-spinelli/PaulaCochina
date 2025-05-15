@@ -9,7 +9,12 @@ const routes: Routes = [
   { 
     path: 'ingredientes',
     loadChildren:() => import("@modules/ingredients/ingredients.module").then(m => m.IngredientsModule)
+  },
+  { 
+    path: 'favoritos', 
+    loadChildren:() => import("@modules/favorites/favorites.module").then(m => m.FavoritesModule)
   }
+
 ];
 
 @NgModule({

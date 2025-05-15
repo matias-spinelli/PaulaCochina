@@ -41,11 +41,50 @@
   .back-button:hover {
     background-color: #cf711f;
   }
-  
+
   .ingredients-list {
     text-align: left;
     margin: 1rem auto 2rem;
     max-width: 400px;
     padding-left: 1.5rem;
     list-style-type: disc;
+  }
+
+  .image-container {
+    position: relative;
+    width: 100%;
+    height: 200px;
+    overflow: hidden;
+  }
+  
+  .image-container img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  
+  .favorite-btn {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    width: 36px;
+    height: 36px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  
+    background-color: white;
+    border: 2px solid #f44336;
+    border-radius: 50%;
+    font-size: 20px;
+    cursor: pointer;
+    color: #f44336;
+  
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+    transition: background-color 0.3s ease, transform 0.1s ease;
+  }
+  
+  .favorite-btn:hover {
+    background-color: #ffe5e5;
+    transform: scale(1.1);
   }

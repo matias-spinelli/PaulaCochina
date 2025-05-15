@@ -1,48 +1,99 @@
 .recipe-card {
-    background-color: #fff;
-    border-radius: 16px;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100%;
+    width: 100%;
+    max-width: 320px;
+    border: 1px solid #ddd;
+    border-radius: 12px;
     overflow: hidden;
-    max-width: 300px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    background-color: #fff;
     transition: transform 0.2s ease-in-out;
+    margin: auto;
   }
   
   .recipe-card:hover {
     transform: scale(1.02);
   }
   
-  .recipe-image {
+  .image-container {
+    position: relative;
     width: 100%;
     height: 200px;
+    overflow: hidden;
+  }
+  
+  .image-container img {
+    width: 100%;
+    height: 100%;
     object-fit: cover;
   }
   
+  .favorite-btn {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    width: 36px;
+    height: 36px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  
+    background-color: white;
+    border: 2px solid #f44336;
+    border-radius: 50%;
+    font-size: 20px;
+    cursor: pointer;
+    color: #f44336;
+  
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+    transition: background-color 0.3s ease, transform 0.1s ease;
+  }
+  
+  .favorite-btn:hover {
+    background-color: #ffe5e5;
+    transform: scale(1.1);
+  }
+  
+  .recipe-card h3,
+  .recipe-card p,
   .recipe-content {
-    padding: 1rem;
+    padding: 0 16px;
+    margin: 12px 0;
   }
   
-  .recipe-title {
-    font-size: 1.25rem;
-    color: #e67e22;
-    margin-bottom: 0.5rem;
-  }
-  
-  .recipe-description {
-    font-size: 0.95rem;
-    color: #555;
-    margin-bottom: 1rem;
+  .recipe-content {
+    padding-bottom: 16px;
   }
   
   .view-button {
-    background-color: #e67e22;
-    color: #fff;
-    border: none;
-    padding: 0.5rem 1rem;
-    border-radius: 8px;
-    cursor: pointer;
-    font-weight: bold;
+    display: inline-block;
+    padding: 8px 12px;
+    background-color: #1976d2;
+    color: white;
+    text-decoration: none;
+    border-radius: 6px;
+    transition: background-color 0.2s ease-in-out;
   }
   
   .view-button:hover {
-    background-color: #cf711f;
+    background-color: #145ca3;
+  }
+
+  @keyframes pop {
+    0% {
+      transform: scale(1);
+    }
+    50% {
+      transform: scale(1.4);
+    }
+    100% {
+      transform: scale(1);
+    }
+  }
+  
+  .favorite-btn.animate {
+    animation: pop 0.3s ease;
   }

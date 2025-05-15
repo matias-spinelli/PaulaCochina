@@ -5,10 +5,8 @@ import { RecipesListComponent } from './componens/recipes-list/recipes-list.comp
 import { RecipeCardComponent } from './componens/recipe-card/recipe-card.component';
 import { RecipeDetailComponent } from './componens/recipe-detail/recipe-detail.component';
 import { RouterModule } from '@angular/router';
-import { UnitLabelPipe } from './pipes/unit-label.pipe';
-import { FormatIngredientPipe } from './pipes/format-ingredient.pipe';
-
-
+import { FormatIngredientPipe } from './pipe/format-ingredient.pipe';
+import { UnitLabelPipe } from './pipe/unit-label.pipe';
 
 @NgModule({
   declarations: [
@@ -26,6 +24,7 @@ import { FormatIngredientPipe } from './pipes/format-ingredient.pipe';
   exports: [
     TopBarComponent,
     RecipesListComponent,
+    RecipeCardComponent,
     UnitLabelPipe,
     FormatIngredientPipe
   ]

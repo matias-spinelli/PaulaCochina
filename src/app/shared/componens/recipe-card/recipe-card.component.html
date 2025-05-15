@@ -1,12 +1,9 @@
 <div class="recipe-card">
     <div class="image-container">
         <img [src]="recipe.imageUrl" alt="Imagen de receta" />
-        <button
-        class="favorite-btn"
-        [ngClass]="{ animate: animateHeart }"
-        (click)="toggleFavorite($event)">
-        {{ isFav ? '❤️' : '🤍' }}
-      </button>
+        <button class="favorite-btn" (click)="toggleFavorite($event)" appHeartAnimate>
+            {{ isFav ? '❤️' : '🤍' }}
+        </button>
     </div>
     <h3>{{ recipe.title }}</h3>
     <p>{{ recipe.description }}</p>

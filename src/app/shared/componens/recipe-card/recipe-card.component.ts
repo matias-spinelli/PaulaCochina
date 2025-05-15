@@ -27,8 +27,6 @@ import { trigger, transition, style, animate, keyframes } from '@angular/animati
 export class RecipeCardComponent {
   @Input() recipe!: Recipe;
   @Output() unfavorite = new EventEmitter<Recipe>();
-  hasInteracted = false;
-  animateHeart = false;
 
   constructor(private recipeService: RecipeService) {}
 
@@ -47,11 +45,5 @@ export class RecipeCardComponent {
     if (!isNowFavorite) {
       this.unfavorite.emit(this.recipe);
     }
-  
-    this.hasInteracted = true;
-  
-    // 👇 Activar animación del corazón solo cuando hay interacción
-    this.animateHeart = true;
-    setTimeout(() => this.animateHeart = false, 300); // duración de la animación
   }
 }

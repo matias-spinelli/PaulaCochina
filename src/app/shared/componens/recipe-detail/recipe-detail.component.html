@@ -1,21 +1,58 @@
-<div *ngIf="recipe" class="recipe-detail">
-    <div class="image-container">
-        <img [src]="recipe.imageUrl" alt="Imagen de {{ recipe.title }}" class="detail-image" />
-        <button
-          class="favorite-btn"
-          (click)="toggleFavorite()"
-          [@pop]="hasInteracted ? isFav : null"
-        >
-          {{ isFav ? '❤️' : '🤍' }}
+<div *ngIf="editableRecipe" class="recipe-detail">
+
+    <div class="top-bar">
+        <button *ngIf="!editMode" (click)="toggleEditMode()" class="action-button top-action">
+          ✏️ Editar
         </button>
+      
+        <ng-container *ngIf="editMode">
+          <button (click)="toggleEditMode()" class="action-button top-action">
+            💾 Guardar
+          </button>
+          <button (click)="cancelEdit()" class="action-button cancel">
+            ❌ Cancelar
+          </button>
+        </ng-container>
+      </div>
+  
+    <div class="image-container">
+      <img [src]="editableRecipe.imageUrl" alt="Imagen de {{ editableRecipe.title }}" class="detail-image" />
+      <button class="favorite-btn" (click)="toggleFavorite()" appHeartAnimate>
+        {{ isFav ? '❤️' : '🤍' }}
+      </button>
     </div>
-    <h2 class="detail-title">{{ recipe.title }}</h2>
-    <p class="detail-description">{{ recipe.description }}</p>
-    <h3>Ingredientes</h3>
-    <ul class="ingredients-list">
-      <li *ngFor="let ing of recipe.ingredients">
-        {{ ing | formatIngredient }}
-    </li>
-    </ul>
-    <a routerLink="/" class="back-button">← Volver</a>
-</div>
+  
+    <div *ngIf="!editMode">
+      <h2 class="detail-title">{{ editableRecipe.title }}</h2>
+      <p class="detail-description">{{ editableRecipe.description }}</p>
+  
+      <h3>Ingredientes</h3>
+      <ul class="ingredients-list">
+        <li *ngFor="let ing of editableRecipe.ingredients">
+          {{ ing | formatIngredient }}
+        </li>
+      </ul>
+    </div>
+  
+    <div *ngIf="editMode">
+      <input type="text" [(ngModel)]="editableRecipe.title" placeholder="Título" class="form-control" />
+      <textarea [(ngModel)]="editableRecipe.description" placeholder="Descripción" class="form-control"></textarea>
+      <input type="text" [(ngModel)]="editableRecipe.imageUrl" placeholder="URL de imagen" class="form-control" />
+  
+      <h3>Ingredientes</h3>
+      <div *ngFor="let ing of editableRecipe.ingredients; let i = index" class="ingredient-row">
+        <input [(ngModel)]="ing.name" placeholder="Ingrediente" class="form-control small" />
+        <input [(ngModel)]="ing.quantity" type="number" placeholder="Cantidad" class="form-control tiny" />
+        <select [(ngModel)]="ing.unit" class="form-control tiny">
+          <option *ngFor="let unit of units" [value]="unit">{{ unit }}</option>
+        </select>
+        <button (click)="removeIngredient(i)" class="delete-btn">🗑</button>
+      </div>
+      <button (click)="addIngredient()" class="action-button">+ Ingrediente</button>
+  
+    </div>
+  
+    <div class="buttons-row" *ngIf="!editMode">
+      <a routerLink="/" class="back-button">← Volver</a>
+    </div>
+  </div>

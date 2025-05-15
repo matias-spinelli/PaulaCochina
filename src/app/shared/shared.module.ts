@@ -7,6 +7,8 @@ import { RecipeDetailComponent } from './componens/recipe-detail/recipe-detail.c
 import { RouterModule } from '@angular/router';
 import { FormatIngredientPipe } from './pipe/format-ingredient.pipe';
 import { UnitLabelPipe } from './pipe/unit-label.pipe';
+import { HeartAnimateDirective } from './directives/heart-animate.directive';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -15,18 +17,21 @@ import { UnitLabelPipe } from './pipe/unit-label.pipe';
     RecipeCardComponent,
     RecipeDetailComponent,
     UnitLabelPipe,
-    FormatIngredientPipe
+    FormatIngredientPipe,
+    HeartAnimateDirective
   ],
   imports: [
     CommonModule,
-    RouterModule
+    RouterModule,
+    FormsModule
   ],
   exports: [
     TopBarComponent,
     RecipesListComponent,
     RecipeCardComponent,
     UnitLabelPipe,
-    FormatIngredientPipe
+    FormatIngredientPipe,
+    HeartAnimateDirective
   ]
 })
 export class SharedModule { }

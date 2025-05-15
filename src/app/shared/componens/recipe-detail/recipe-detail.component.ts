@@ -29,29 +29,31 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 
 export class RecipeDetailComponent implements OnInit {
   recipe!: Recipe;
+  editableRecipe!: Recipe;
+  originalRecipe!: Recipe;
   isFav = false;
   editMode = false;
-  editableRecipe!: Recipe;
-  originalRecipe!: Recipe; // para cancelar edición
   units = UNITS;
 
-  constructor(private route: ActivatedRoute, private recipeService: RecipeService, private snackBar: MatSnackBar) { }
+  constructor(
+    private route: ActivatedRoute,
+    private recipeService: RecipeService,
+    private snackBar: MatSnackBar
+  ) {}
 
   ngOnInit(): void {
     const id = Number(this.route.snapshot.paramMap.get('id'));
-    if (id) {
-      const found = this.recipeService.getRecipeById(id);
+    const found = this.recipeService.getRecipeById(id);
 
-      if (!found) {
-        // Manejo si no se encuentra (podés redirigir o mostrar algo)
-        console.error('Receta no encontrada');
-        return;
-      }
-
-      this.recipe = found;
-      this.editableRecipe = JSON.parse(JSON.stringify(this.recipe)); // clon profundo
-      this.isFav = this.recipeService.isFavorite(id);
+    if (!found) {
+      console.error('Receta no encontrada');
+      return;
     }
+
+    this.recipe = found;
+    this.editableRecipe = structuredClone(this.recipe);
+    this.originalRecipe = structuredClone(this.recipe);
+    this.isFav = this.recipeService.isFavorite(id);
   }
 
   toggleFavorite(): void {
@@ -60,25 +62,24 @@ export class RecipeDetailComponent implements OnInit {
   }
 
   toggleEditMode(): void {
-    if (this.editMode && this.editableRecipe) {
-      // Guardar los cambios
-      this.recipe = { ...this.editableRecipe };
-      this.snackBar.open('Receta actualizada con éxito', 'Cerrar', {
-        duration: 3000
-      });
-    } else if (this.recipe) {
-      // Clonar receta al entrar en modo edición
-      this.editableRecipe = structuredClone(this.recipe);
-    }
-  
-    this.editMode = !this.editMode;
+    this.editableRecipe = structuredClone(this.recipe);
+    this.originalRecipe = structuredClone(this.recipe);
+    this.editMode = true;
   }
-  
+
+  save(): void {
+    this.recipe = { ...this.editableRecipe };
+    this.snackBar.open('Receta actualizada con éxito', 'Cerrar', {
+      duration: 3000,
+    });
+    this.editMode = false;
+  }
+
   cancelEdit(): void {
     this.editableRecipe = structuredClone(this.originalRecipe);
     this.editMode = false;
   }
-  
+
   addIngredient(): void {
     this.editableRecipe.ingredients.push({ name: '', quantity: 0, unit: 'unidad' });
   }
@@ -86,5 +87,4 @@ export class RecipeDetailComponent implements OnInit {
   removeIngredient(index: number): void {
     this.editableRecipe.ingredients.splice(index, 1);
   }
-  
 }

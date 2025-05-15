@@ -1,10 +1,14 @@
 <div class="page-container">
     <ng-container *ngIf="recipes.length; else emptyList">
       <div class="recipes-grid">
-        <app-recipe-card
+        
+        <app-recipe-card-new></app-recipe-card-new>
+
+        <app-recipe-card (click)="navigateToDetail(recipe.id)"
           *ngFor="let recipe of recipes"
           [recipe]="recipe">
         </app-recipe-card>
+
       </div>
     </ng-container>
   

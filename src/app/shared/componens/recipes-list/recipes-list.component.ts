@@ -1,6 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { Recipe } from '@core/models/recipe.model';
-import { RecipeService } from '@shared/services/recipe-service.service';
 
 @Component({
   selector: 'app-recipes-list',
@@ -10,8 +10,13 @@ import { RecipeService } from '@shared/services/recipe-service.service';
 })
 export class RecipesListComponent implements OnInit {
   @Input() recipes: Recipe[] = [];
+  @Input() showAddCard = false;
 
-  constructor(private recipeService: RecipeService) {}
+  constructor(private router: Router) {}
 
   ngOnInit(): void { }
+
+  navigateToDetail(id: number): void {
+    this.router.navigate(['/recipe', id]);
+  }
 }

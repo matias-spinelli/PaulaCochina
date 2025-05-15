@@ -9,6 +9,8 @@ import { FormatIngredientPipe } from './pipe/format-ingredient.pipe';
 import { UnitLabelPipe } from './pipe/unit-label.pipe';
 import { HeartAnimateDirective } from './directives/heart-animate.directive';
 import { FormsModule } from '@angular/forms';
+import { RecipeNewComponent } from './componens/recipe-new/recipe-new.component';
+import { RecipeCardNewComponent } from './componens/recipe-card-new/recipe-card-new.component';
 
 @NgModule({
   declarations: [
@@ -16,6 +18,8 @@ import { FormsModule } from '@angular/forms';
     RecipesListComponent,
     RecipeCardComponent,
     RecipeDetailComponent,
+    RecipeCardNewComponent,
+    RecipeNewComponent,
     UnitLabelPipe,
     FormatIngredientPipe,
     HeartAnimateDirective
@@ -29,6 +33,8 @@ import { FormsModule } from '@angular/forms';
     TopBarComponent,
     RecipesListComponent,
     RecipeCardComponent,
+    RecipeCardNewComponent,
+    RecipeNewComponent,
     UnitLabelPipe,
     FormatIngredientPipe,
     HeartAnimateDirective

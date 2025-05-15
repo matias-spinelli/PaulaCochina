@@ -108,4 +108,7 @@ export class RecipeService {
     return this.getFavorites().some(recipe => recipe.id === id);
   }
   
+  addRecipe(recipe: Recipe): void {
+    this.recipes.push(recipe);
+  }
 }

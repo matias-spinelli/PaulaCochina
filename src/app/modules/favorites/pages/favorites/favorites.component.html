@@ -1,25 +1,8 @@
-<!-- <ng-container *ngFor="let recipe of favoriteRecipes">
-    <div class="card-wrapper" *ngIf="!removingMap[recipe.id]" [@fadeOut]>
-        <app-recipe-card
-        [recipe]="recipe"
-        (unfavorite)="removeFromFavorites(recipe)"></app-recipe-card>
-    </div>
-  </ng-container> -->
-
-  <div class="page-container">
-    <ng-container *ngIf="favoriteRecipes.length; else emptyList">
-        <div class="recipes-grid">
-            <app-recipe-card
-            *ngFor="let recipe of favoriteRecipes"
-            [recipe]="recipe"
-            (unfavorite)="removeFromFavorites(recipe)"
-            [@fadeInOut]>
-          </app-recipe-card>
-          </div>
-    </ng-container>
-  
-    <ng-template #emptyList>
-      <p class="empty-message">No hay recetas para mostrar 😢</p>
-    </ng-template>
-  </div>
-
+<div class="favorites-page">
+  <app-recipes-list 
+      [recipes]="favoriteRecipes" 
+      [showAddCard]="false"
+      [listType]="listTypes.Favorites"
+      (unfavorite)="removeFromFavorites($event)">
+  </app-recipes-list>
+</div>

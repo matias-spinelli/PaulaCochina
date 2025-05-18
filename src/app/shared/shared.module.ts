@@ -11,6 +11,7 @@ import { HeartAnimateDirective } from './directives/heart-animate.directive';
 import { FormsModule } from '@angular/forms';
 import { RecipeNewComponent } from './componens/recipe-new/recipe-new.component';
 import { RecipeCardNewComponent } from './componens/recipe-card-new/recipe-card-new.component';
+import { RecipeSearchComponent } from './componens/recipe-search/recipe-search.component';
 
 @NgModule({
   declarations: [
@@ -20,9 +21,10 @@ import { RecipeCardNewComponent } from './componens/recipe-card-new/recipe-card-
     RecipeDetailComponent,
     RecipeCardNewComponent,
     RecipeNewComponent,
+    RecipeSearchComponent,
     UnitLabelPipe,
     FormatIngredientPipe,
-    HeartAnimateDirective
+    HeartAnimateDirective,
   ],
   imports: [
     CommonModule,
@@ -35,6 +37,7 @@ import { RecipeCardNewComponent } from './componens/recipe-card-new/recipe-card-
     RecipeCardComponent,
     RecipeCardNewComponent,
     RecipeNewComponent,
+    RecipeSearchComponent,
     UnitLabelPipe,
     FormatIngredientPipe,
     HeartAnimateDirective

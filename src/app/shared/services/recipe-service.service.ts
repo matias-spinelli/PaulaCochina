@@ -76,18 +76,31 @@ export class RecipeService {
     return this.recipes.find(recipe => recipe.id === id);
   }
 
-
+  addFavorite(recipe: Recipe): void {
+    const exists = this.favoriteRecipes.some(r => r.id === recipe.id);
+    if (!exists) {
+      this.favoriteRecipes.push(recipe);
+      this.saveFavorites();
+    }
+  }
   
-  toggleFavorite(recipe: Recipe): boolean {
+  removeFavorite(recipe: Recipe): void {
     const index = this.favoriteRecipes.findIndex(r => r.id === recipe.id);
     if (index !== -1) {
       this.favoriteRecipes.splice(index, 1);
       this.saveFavorites();
-      return false; // ya no es favorito
+    }
+  }
+  
+  // toggleFavorite queda solo para uso rápido, pero no lo usamos en el deshacer
+  toggleFavorite(recipe: Recipe): boolean {
+    const exists = this.favoriteRecipes.some(r => r.id === recipe.id);
+    if (exists) {
+      this.removeFavorite(recipe);
+      return false;
     } else {
-      this.favoriteRecipes.push(recipe);
-      this.saveFavorites();
-      return true; // ahora es favorito
+      this.addFavorite(recipe);
+      return true;
     }
   }
 
@@ -110,5 +123,19 @@ export class RecipeService {
   
   addRecipe(recipe: Recipe): void {
     this.recipes.push(recipe);
+  }
+
+  filterRecipes(term: string, recipes: Recipe[]): Recipe[] {
+    const lowerTerm = term.toLowerCase().trim();
+  
+    return recipes.filter(recipe => {
+      const titleMatch = recipe.title.toLowerCase().includes(lowerTerm);
+      const descriptionMatch = recipe.description.toLowerCase().includes(lowerTerm);
+      const ingredientsMatch = recipe.ingredients.some(ing =>
+        ing.name.toLowerCase().includes(lowerTerm)
+      );
+  
+      return titleMatch || descriptionMatch || ingredientsMatch;
+    });
   }
 }

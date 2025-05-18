@@ -6,6 +6,8 @@ import { AppComponent } from './app.component';
 import { RouterModule } from '@angular/router';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { HTTP_INTERCEPTORS, provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
+import { CookieService } from 'ngx-cookie-service';
 
 @NgModule({
   declarations: [
@@ -19,7 +21,9 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     RouterModule
   ],
   providers: [
-    provideClientHydration(withEventReplay())
+    provideClientHydration(withEventReplay()),
+    provideHttpClient(withInterceptorsFromDi()),
+    CookieService
   ],
   bootstrap: [AppComponent]
 })

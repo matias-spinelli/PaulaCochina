@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Recipe } from '@core/models/recipe.model';
+import { RecipesListType } from '@shared/componens/recipes-list/recipes-list-type.enum';
 import { RecipeService } from '@shared/services/recipe-service.service';
 
 @Component({
@@ -9,11 +10,24 @@ import { RecipeService } from '@shared/services/recipe-service.service';
   styleUrl: './recipes-page.component.css'
 })
 export class RecipesPageComponent implements OnInit {
-  recipes: Recipe[] = [];
+  allRecipes: Recipe[] = [];
+  searchTerm = '';
+  filteredRecipes: Recipe[] = [];
+  listTypes = RecipesListType;
 
   constructor(private recipeService: RecipeService) {}
   
   ngOnInit(): void {
-    this.recipes = this.recipeService.getAllRecipes();
+    this.allRecipes = this.recipeService.getAllRecipes();
+    this.filteredRecipes = this.allRecipes;
+  }
+
+  onSearch(term: string): void {
+    this.searchTerm = term;
+    this.filteredRecipes = this.recipeService.filterRecipes(term, this.allRecipes);
+  }
+
+  removeFromFavorites(recipe: Recipe): void {
+
   }
 }

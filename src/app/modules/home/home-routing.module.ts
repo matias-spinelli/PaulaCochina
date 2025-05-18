@@ -13,8 +13,11 @@ const routes: Routes = [
   { 
     path: 'favoritos', 
     loadChildren:() => import("@modules/favorites/favorites.module").then(m => m.FavoritesModule)
+  },
+  {
+    path: '**',
+    redirectTo: ''
   }
-
 ];
 
 @NgModule({

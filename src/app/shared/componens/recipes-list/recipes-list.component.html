@@ -1,18 +1,31 @@
 <div class="page-container">
-    <ng-container *ngIf="recipes.length; else emptyList">
+    <ng-container *ngIf="recipes.length; else showEmptyState">
       <div class="recipes-grid">
         
-        <app-recipe-card-new></app-recipe-card-new>
+        <app-recipe-card-new *ngIf="showAddCard"></app-recipe-card-new>
 
-        <app-recipe-card (click)="navigateToDetail(recipe.id)"
-          *ngFor="let recipe of recipes"
-          [recipe]="recipe">
-        </app-recipe-card>
+        <div *ngFor="let recipe of recipes" [@fadeInOut]>
+          <app-recipe-card
+            (click)="navigateToDetail(recipe.id)"
+            [recipe]="recipe"
+            (unfavorite)="removeFromFavorites(recipe)">
+          </app-recipe-card>
+        </div>
 
       </div>
     </ng-container>
   
-    <ng-template #emptyList>
-      <p class="empty-message">No hay recetas para mostrar 😢</p>
+    <ng-template #showEmptyState>
+      <ng-container [ngSwitch]="listType">
+        <ng-template [ngSwitchCase]="'home'">
+          <p class="empty-message">No se encontraron recetas que coincidan con tu búsqueda 😢</p>
+        </ng-template>
+        <ng-template [ngSwitchCase]="'favorites'">
+          <p class="empty-message">No tenés recetas favoritas todavía 💔</p>
+        </ng-template>
+        <ng-template ngSwitchDefault>
+          <p class="empty-message">No hay recetas para mostrar 😢</p>
+        </ng-template>
+      </ng-container>
     </ng-template>
   </div>

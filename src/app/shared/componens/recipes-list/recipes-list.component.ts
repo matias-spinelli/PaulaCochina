@@ -31,7 +31,7 @@ export class RecipesListComponent implements OnInit {
 
   ngOnInit(): void { }
 
-  navigateToDetail(id: number): void {
+  navigateToDetail(id: string): void {
     this.router.navigate(['/recipe', id]);
   }
 

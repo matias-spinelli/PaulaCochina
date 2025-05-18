@@ -8,6 +8,7 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HTTP_INTERCEPTORS, provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 import { CookieService } from 'ngx-cookie-service';
+import { InjectSessionInterceptor } from '@core/interceptors/inject-session.interceptor';
 
 @NgModule({
   declarations: [
@@ -23,7 +24,8 @@ import { CookieService } from 'ngx-cookie-service';
   providers: [
     provideClientHydration(withEventReplay()),
     provideHttpClient(withInterceptorsFromDi()),
-    CookieService
+    CookieService,
+    { provide: HTTP_INTERCEPTORS, useClass: InjectSessionInterceptor, multi: true }
   ],
   bootstrap: [AppComponent]
 })

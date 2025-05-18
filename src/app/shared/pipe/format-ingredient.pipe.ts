@@ -6,10 +6,10 @@ import { Pipe, PipeTransform } from '@angular/core';
 })
 export class FormatIngredientPipe implements PipeTransform {
 
-  transform(ingredient: { name: string; quantity: number; unit: string }): string {
-    const { quantity, unit, name } = ingredient;
+  transform(ingredient: { name: string; amount: number}): string {
+    const { amount, name } = ingredient;
 
-    const pluralUnits: { [key: string]: string } = {
+/*     const pluralUnits: { [key: string]: string } = {
       unidad: 'unidades',
       cucharada: 'cucharadas',
       cucharadita: 'cucharaditas',
@@ -18,10 +18,10 @@ export class FormatIngredientPipe implements PipeTransform {
       kg: 'kg',
       ml: 'ml',
       L: 'L'
-    };
+    }; */
 
-    const unitLabel = quantity === 1 ? unit : (pluralUnits[unit] || unit);
+    //const unitLabel = amount === 1 ? unit : (pluralUnits[unit] || unit);
 
-    return `${quantity} ${unitLabel} de ${name}`;
+    return `${amount} de ${name}`;
   }
 }

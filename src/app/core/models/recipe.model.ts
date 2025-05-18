@@ -1,10 +1,10 @@
 import { Ingredient } from "./ingredient.model";
 
 export interface Recipe {
-    id: number;
-    title: string;
+    _id: string;
+    name: string;
     description: string;
-    imageUrl: string;  
+    imagePath: string;  
     ingredients: Ingredient[];
     isFavorite?: boolean;
 }

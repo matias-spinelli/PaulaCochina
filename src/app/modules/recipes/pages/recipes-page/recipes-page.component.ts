@@ -18,8 +18,10 @@ export class RecipesPageComponent implements OnInit {
   constructor(private recipeService: RecipeService) {}
   
   ngOnInit(): void {
-    this.allRecipes = this.recipeService.getAllRecipes();
-    this.filteredRecipes = this.allRecipes;
+    this.recipeService.getAllRecipes$().subscribe((response: Recipe[]) => {
+      this.allRecipes = response
+      this.filteredRecipes = response
+    })
   }
 
   onSearch(term: string): void {

@@ -34,7 +34,7 @@ export class RecipeCardComponent {
   }
 
   get isFav(): boolean {
-    return this.recipeService.isFavorite(this.recipe.id);
+    return this.recipeService.isFavorite(this.recipe._id);
   }
 
   toggleFavorite(event: MouseEvent): void {

@@ -35,7 +35,7 @@ export class FavoritesComponent implements OnInit {
   }
 
   removeFromFavorites(recipe: Recipe): void {
-    const index = this.favoriteRecipes.findIndex(r => r.id === recipe.id);
+    const index = this.favoriteRecipes.findIndex(r => r._id === recipe._id);
     if (index === -1) return;
 
     // 1. Quitar visualmente
@@ -62,7 +62,7 @@ export class FavoritesComponent implements OnInit {
     // 6. Limpiar el array de removidos si no se deshace
     snackRef.afterDismissed().subscribe(info => {
       if (!info.dismissedByAction) {
-        this.recentlyRemoved = this.recentlyRemoved.filter(r => r.recipe.id !== recipe.id);
+        this.recentlyRemoved = this.recentlyRemoved.filter(r => r.recipe._id !== recipe._id);
       }
     });
   }

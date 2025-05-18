@@ -1,14 +1,18 @@
 import { Injectable } from '@angular/core';
 import { Recipe } from '@core/models/recipe.model';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { HttpClient } from '@angular/common/http';
+import { environment } from 'src/environments/environment.development';
+import { map, Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class RecipeService {
+  private apiUrl = `${environment.apiUrl}/api/recipes`;
   private favoriteRecipes: Recipe[] = [];
-  private recipes: Recipe[] = [
-    {
+  //private recipes: Recipe[] = []
+    /* {
       id: 1,
       title: 'Pizza Margarita',
       description: 'Una deliciosa pizza italiana con queso mozzarella y albahaca.',
@@ -62,22 +66,24 @@ export class RecipeService {
         { name: 'polvo para hornear', quantity: 10, unit: 'g' }
       ]
     }
-  ];
+  ]; */
 
-  constructor(private snackBar: MatSnackBar) {
+  constructor(private http: HttpClient, private snackBar: MatSnackBar) {
     this.loadFavorites();
   }
 
-  getAllRecipes(): Recipe[] {
-    return this.recipes;
+  getAllRecipes$(): Observable<Recipe[]> {
+    return this.http.get<Recipe[]>(`${this.apiUrl}/get`);
   }
 
-  getRecipeById(id: number): Recipe | undefined {
-    return this.recipes.find(recipe => recipe.id === id);
+  getRecipeById$(id: string): Observable<Recipe | undefined> {
+    return this.getAllRecipes$().pipe(
+      map((recipes) => recipes.find(r => r._id === id))
+    );
   }
 
   addFavorite(recipe: Recipe): void {
-    const exists = this.favoriteRecipes.some(r => r.id === recipe.id);
+    const exists = this.favoriteRecipes.some(r => r._id === recipe._id);
     if (!exists) {
       this.favoriteRecipes.push(recipe);
       this.saveFavorites();
@@ -85,16 +91,15 @@ export class RecipeService {
   }
   
   removeFavorite(recipe: Recipe): void {
-    const index = this.favoriteRecipes.findIndex(r => r.id === recipe.id);
+    const index = this.favoriteRecipes.findIndex(r => r._id === recipe._id);
     if (index !== -1) {
       this.favoriteRecipes.splice(index, 1);
       this.saveFavorites();
     }
   }
   
-  // toggleFavorite queda solo para uso rápido, pero no lo usamos en el deshacer
   toggleFavorite(recipe: Recipe): boolean {
-    const exists = this.favoriteRecipes.some(r => r.id === recipe.id);
+    const exists = this.favoriteRecipes.some(r => r._id === recipe._id);
     if (exists) {
       this.removeFavorite(recipe);
       return false;
@@ -117,19 +122,27 @@ export class RecipeService {
     this.favoriteRecipes = stored ? JSON.parse(stored) : [];
   }
 
-  isFavorite(id: number): boolean {
-    return this.getFavorites().some(recipe => recipe.id === id);
+  isFavorite(id: string): boolean {
+    return this.getFavorites().some(recipe => recipe._id === id);
   }
   
-  addRecipe(recipe: Recipe): void {
-    this.recipes.push(recipe);
+  addRecipe(recipe: Recipe): Observable<Recipe> {
+    return this.http.post<Recipe>((`${this.apiUrl}/add`), recipe);
+  }
+
+  updateRecipe(id: string, recipe: Recipe): Observable<Recipe> {
+    return this.http.put<Recipe>(`${this.apiUrl}/edit/${id}`, recipe);
+  }
+
+  deleteRecipe(id: string): Observable<void> {
+    return this.http.delete<void>(`${this.apiUrl}/delete/${id}`);
   }
 
   filterRecipes(term: string, recipes: Recipe[]): Recipe[] {
     const lowerTerm = term.toLowerCase().trim();
   
     return recipes.filter(recipe => {
-      const titleMatch = recipe.title.toLowerCase().includes(lowerTerm);
+      const titleMatch = recipe.name.toLowerCase().includes(lowerTerm);
       const descriptionMatch = recipe.description.toLowerCase().includes(lowerTerm);
       const ingredientsMatch = recipe.ingredients.some(ing =>
         ing.name.toLowerCase().includes(lowerTerm)

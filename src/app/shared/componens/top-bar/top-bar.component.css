@@ -13,7 +13,7 @@
   .logo {
     font-size: 1.5rem;
     font-weight: bold;
-    color: #e67e22;
+    color: var(--blue-pepper);
   }
   
   .nav-links {

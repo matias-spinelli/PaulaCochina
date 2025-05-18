@@ -54,9 +54,8 @@ export class AuthPageComponent implements OnInit {
   
     authObs.subscribe({
       next: (response) => {
-        const { tokenSession, data } = response
-        console.log('Sesion iniciada correcta', response);
-        this.cookie.set('token', tokenSession, 4, '/')
+        const { idToken, data } = response
+        this.cookie.set('idToken', idToken, 4, '/')
         this.router.navigate(['/', 'recipes'])
       },
       error: (err) => {

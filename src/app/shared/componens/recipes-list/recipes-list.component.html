@@ -6,7 +6,7 @@
 
         <div *ngFor="let recipe of recipes" [@fadeInOut]>
           <app-recipe-card
-            (click)="navigateToDetail(recipe.id)"
+            (click)="navigateToDetail(recipe._id)"
             [recipe]="recipe"
             (unfavorite)="removeFromFavorites(recipe)">
           </app-recipe-card>

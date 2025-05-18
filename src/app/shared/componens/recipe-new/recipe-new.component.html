@@ -4,17 +4,17 @@
       <button routerLink="/" class="action-button cancel">❌ Cancelar</button>
     </div>
   
-    <input type="text" [(ngModel)]="recipe.title" placeholder="Título" class="form-control" />
+    <input type="text" [(ngModel)]="recipe.name" placeholder="Título" class="form-control" />
     <textarea [(ngModel)]="recipe.description" placeholder="Descripción" class="form-control"></textarea>
-    <input type="text" [(ngModel)]="recipe.imageUrl" placeholder="URL de imagen" class="form-control" />
+    <input type="text" [(ngModel)]="recipe.imagePath" placeholder="URL de imagen" class="form-control" />
   
     <h3>Ingredientes</h3>
     <div *ngFor="let ing of recipe.ingredients; let i = index" class="ingredient-row">
       <input [(ngModel)]="ing.name" placeholder="Ingrediente" class="form-control small" />
-      <input [(ngModel)]="ing.quantity" type="number" placeholder="Cantidad" class="form-control tiny" />
-      <select [(ngModel)]="ing.unit" class="form-control tiny">
+      <input [(ngModel)]="ing.amount" type="number" placeholder="Cantidad" class="form-control tiny" />
+     <!--  <select [(ngModel)]="ing.unit" class="form-control tiny">
         <option *ngFor="let unit of units" [value]="unit">{{ unit }}</option>
-      </select>
+      </select> -->
       <button (click)="removeIngredient(i)" class="delete-btn">🗑</button>
     </div>
   

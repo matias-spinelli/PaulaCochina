@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Ingredient } from '@core/models/ingredient.model';
+import { Recipe } from '@core/models/recipe.model';
 import { RecipeService } from '@shared/services/recipe-service.service';
 
 @Component({
@@ -57,31 +58,34 @@ export class ShoppingListComponent implements OnInit {
   }
 
 private initializeIngredients(): void {
-  const allRecipes = this.recipeService.getAllRecipes();
-  const allIngredients: Ingredient[] = allRecipes.flatMap(r => r.ingredients);
-  const unique = this.removeDuplicates(allIngredients);
-
-  this.ingredients = unique.map(ing => ({
-    ingredient: ing,
-    checked: false
-  }));
-
-  this.saveToStorage();
-
-  // Solo guardar la lista original si no está en localStorage
-  if (!localStorage.getItem('shoppingListOriginal')) {
-    try {
-      localStorage.setItem('shoppingListOriginal', JSON.stringify(this.ingredients));
-    } catch (e) {
-      console.warn('No se pudo guardar la lista original:', e);
+    
+  this.recipeService.getAllRecipes$().subscribe((response: Recipe[]) => {
+    const allRecipes = response
+    const allIngredients: Ingredient[] = allRecipes.flatMap(r => r.ingredients);
+    const unique = this.removeDuplicates(allIngredients);
+  
+    this.ingredients = unique.map(ing => ({
+      ingredient: ing,
+      checked: false
+    }));
+  
+    this.saveToStorage();
+  
+    // Solo guardar la lista original si no está en localStorage
+    if (!localStorage.getItem('shoppingListOriginal')) {
+      try {
+        localStorage.setItem('shoppingListOriginal', JSON.stringify(this.ingredients));
+      } catch (e) {
+        console.warn('No se pudo guardar la lista original:', e);
+      }
     }
-  }
+  })
 }
 
   private removeDuplicates(ingredients: Ingredient[]): Ingredient[] {
     const seen = new Set<string>();
     return ingredients.filter(ing => {
-      const key = `${ing.name}-${ing.unit}`;
+      const key = `${ing.name}`;
       if (seen.has(key)) return false;
       seen.add(key);
       return true;

@@ -9,6 +9,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HTTP_INTERCEPTORS, provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 import { CookieService } from 'ngx-cookie-service';
 import { InjectSessionInterceptor } from '@core/interceptors/inject-session.interceptor';
+import { MatDialogModule } from '@angular/material/dialog';
+import { MatButtonModule } from '@angular/material/button';
 
 @NgModule({
   declarations: [
@@ -19,7 +21,9 @@ import { InjectSessionInterceptor } from '@core/interceptors/inject-session.inte
     BrowserAnimationsModule,
     BrowserModule,
     AppRoutingModule,
-    RouterModule
+    RouterModule,
+    MatDialogModule,
+    MatButtonModule
   ],
   providers: [
     provideClientHydration(withEventReplay()),

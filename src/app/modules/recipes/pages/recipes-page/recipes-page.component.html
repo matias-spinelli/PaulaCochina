@@ -1,9 +1,13 @@
-<div class="recipes-page">
-    <app-recipe-search (search)="onSearch($event)"></app-recipe-search>
-    <app-recipes-list 
-        [recipes]="filteredRecipes" 
-        [showAddCard]="!searchTerm"
-        [listType]="listTypes.Home"
-        (unfavorite)="removeFromFavorites($event)">
-    </app-recipes-list>
-</div>
+<app-loading-spinner *ngIf="loading"></app-loading-spinner>
+<ng-container *ngIf="!loading">
+    <div class="recipes-page">
+        <app-recipe-search (search)="onSearch($event)"></app-recipe-search>
+        <app-recipes-list 
+            [recipes]="filteredRecipes" 
+            [showAddCard]="!searchTerm"
+            [listType]="listTypes.Home"
+            (unfavorite)="removeFromFavorites($event)">
+        </app-recipes-list>
+    </div>
+</ng-container>
+

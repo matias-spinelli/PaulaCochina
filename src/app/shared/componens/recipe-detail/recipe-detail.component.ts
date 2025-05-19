@@ -5,6 +5,8 @@ import { RecipeService } from '@shared/services/recipe-service.service';
 import { trigger, transition, style, animate, keyframes } from '@angular/animations';
 //import { UNITS } from '@shared/constants';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { MatDialog } from '@angular/material/dialog';
+import { ConfirmDeleteRecipeDialogComponent } from '../confirm-delete-recipe-dialog/confirm-delete-recipe-dialog.component';
 
 @Component({
   selector: 'app-recipe-detail',
@@ -34,8 +36,10 @@ export class RecipeDetailComponent implements OnInit {
   isFav = false;
   editMode = false;
   //units = UNITS;
+  loading = true;
 
   constructor(
+    private dialog: MatDialog,
     private route: ActivatedRoute,
     private recipeService: RecipeService,
     private snackBar: MatSnackBar,
@@ -44,16 +48,23 @@ export class RecipeDetailComponent implements OnInit {
 
   ngOnInit(): void {
     const id = String(this.route.snapshot.paramMap.get('id'));
-    this.recipeService.getRecipeById$(id).subscribe(recipe => { 
-      if (recipe) {
-
-        console.log('recipe',recipe)
-        console.log('ingredientes',recipe.ingredients)
-        
-        this.recipe = recipe;
-        this.editableRecipe = structuredClone(this.recipe);
-        this.originalRecipe = structuredClone(this.recipe);
-        this.isFav = this.recipeService.isFavorite(id);
+  
+    this.recipeService.getRecipeById$(id).subscribe({
+      next: (recipe) => {
+        if (recipe) {
+          this.recipe = recipe;
+          this.editableRecipe = structuredClone(this.recipe);
+          this.originalRecipe = structuredClone(this.recipe);
+          this.isFav = this.recipeService.isFavorite(id);
+        } else {
+          console.warn('Receta no encontrada');
+        }
+      },
+      error: (err) => {
+        console.error('Error al cargar la receta:', err);
+      },
+      complete: () => {
+        this.loading = false;
       }
     });
   }
@@ -84,19 +95,21 @@ export class RecipeDetailComponent implements OnInit {
     }
   }
 
-  delete(): void {
-    if (this.recipe?._id) {
-      this.recipeService.deleteRecipe(this.recipe._id).subscribe({
-        next: () => {
-          this.snackBar.open('Receta eliminada', 'Cerrar', { duration: 3000 });
-          //this.router.navigate(['/recipes']);
-          this.router.navigate(['/']);
-        },
-        error: () => {
-          this.snackBar.open('Error al eliminar receta', 'Cerrar', { duration: 3000 });
-        }
-      });
-    }
+  onDelete(): void {
+    const dialogRef = this.dialog.open(ConfirmDeleteRecipeDialogComponent);
+    dialogRef.afterClosed().subscribe(confirmed => {
+      if (confirmed && this.recipe?._id) {
+        this.recipeService.deleteRecipe(this.recipe._id).subscribe({
+          next: () => {
+            this.snackBar.open('Receta eliminada', 'Cerrar', { duration: 3000 });
+            this.router.navigate(['/']);
+          },
+          error: () => {
+            this.snackBar.open('Error al eliminar receta', 'Cerrar', { duration: 3000 });
+          }
+        });
+      }
+    });
   }
   
   cancelEdit(): void {

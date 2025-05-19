@@ -1,0 +1,15 @@
+.dialog-title {
+    font-weight: bold;
+    color: var(--blue-pepper);
+  }
+  
+  .dialog-content p {
+    margin: 0.5rem 0;
+    font-size: 1rem;
+    color: #444;
+  }
+  
+  .dialog-actions {
+    padding-top: 1rem;
+    gap: 0.5rem;
+  }

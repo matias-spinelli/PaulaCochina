@@ -14,14 +14,23 @@ export class RecipesPageComponent implements OnInit {
   searchTerm = '';
   filteredRecipes: Recipe[] = [];
   listTypes = RecipesListType;
+  loading = true;
 
   constructor(private recipeService: RecipeService) {}
-  
+
   ngOnInit(): void {
-    this.recipeService.getAllRecipes$().subscribe((response: Recipe[]) => {
-      this.allRecipes = response
-      this.filteredRecipes = response
-    })
+    this.recipeService.getAllRecipes$().subscribe({
+      next: recipes => {
+        this.allRecipes = recipes;
+        this.filteredRecipes = recipes;
+      },
+      error: (err) => {
+        console.error('Error al cargar las recetas:', err);
+      },
+      complete: () => {
+        this.loading = false;
+      }
+    });
   }
 
   onSearch(term: string): void {

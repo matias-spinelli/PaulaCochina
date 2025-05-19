@@ -3,8 +3,9 @@
       <h1 class="auth-title">Paula Cochina</h1>
   
       <img src="assets/morron-azul.png" alt="Decorative" class="auth-image" />
-  
-      <form [formGroup]="authForm" (ngSubmit)="sendLogin()" class="auth-form">
+      
+      <app-loading-spinner *ngIf="isLoading"></app-loading-spinner>
+      <form *ngIf="!isLoading" [formGroup]="authForm" (ngSubmit)="sendLogin()" class="auth-form">
         <div class="form-group">
           <label for="email">Email</label>
           <input id="email" type="email" formControlName="email" />

@@ -8,7 +8,7 @@
   }
   
   .auth-card {
-    background: white;
+    background: var(--color-white);
     border-radius: 12px;
     padding: 2rem;
     max-width: 400px;
@@ -60,7 +60,7 @@
   button[type="submit"] {
     padding: 0.75rem;
     background: var(--blue-pepper);
-    color: white;
+    color: var(--color-white);
     border: none;
     border-radius: 8px;
     font-weight: bold;
@@ -97,7 +97,7 @@
     border-radius: 6px;
     font-weight: bold;
     cursor: pointer;
-    color: white;
+    color: var(--color-white);
   }
   
   .facebook {
@@ -116,6 +116,12 @@
     width: 20px;
     height: 20px;
   }
+
+.auth-form input,
+.auth-form button[type="submit"] {
+  width: 100%;
+  box-sizing: border-box;
+}
   
 /*   .social:hover {
     background-color: #f0f0f0;

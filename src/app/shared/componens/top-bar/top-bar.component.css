@@ -1,5 +1,5 @@
 .top-bar {
-    background-color: #fff8f0;
+    background-color: var(--card-bakckground-color);
     color: #333;
     display: flex;
     justify-content: space-between;
@@ -21,14 +21,21 @@
     gap: 1.5rem;
   }
   
-  .nav-links a {
+  .nav-links a,
+  .nav-links .logout-link {
     text-decoration: none;
     color: #333;
     font-weight: 500;
+    background: none;
+    border: none;
+    font-family: inherit;
+    cursor: pointer;
+    padding: 0;
   }
   
-  .nav-links a:hover {
-    color: #e67e22;
+  .nav-links a:hover,
+  .nav-links .logout-link:hover {
+    color: var(--orange-color);
   }
   
   /* Hamburguesa solo visible en móviles */

@@ -1,57 +1,63 @@
-<div *ngIf="editableRecipe" class="recipe-detail">
+<app-loading-spinner *ngIf="loading"></app-loading-spinner>
+<ng-container *ngIf="!loading">
+  <div *ngIf="editableRecipe" class="recipe-detail">
 
-  <div class="top-bar">
-    <button *ngIf="!editMode" (click)="toggleEditMode()" class="action-button top-action">
-      ✏️ Editar
-    </button>
-
-    <ng-container *ngIf="editMode">
-      <button (click)="save()" class="action-button top-action">
-        💾 Guardar
+    <div class="top-bar">
+      <button *ngIf="!editMode" (click)="toggleEditMode()" class="action-button top-action">
+        ✏️ Editar
       </button>
-      <button (click)="cancelEdit()" class="action-button cancel">
-        ❌ Cancelar
+      <button *ngIf="!editMode" (click)="onDelete()" class="action-button delete-action">
+        🗑️ Eliminar
       </button>
-    </ng-container>
-  </div>
-
-  <div class="image-container">
-    <img [src]="editableRecipe.imagePath" alt="Imagen de {{ editableRecipe.name }}" class="detail-image" />
-    <button class="favorite-btn" (click)="toggleFavorite()" appHeartAnimate>
-      {{ isFav ? '❤️' : '🤍' }}
-    </button>
-  </div>
-
-  <div *ngIf="!editMode">
-    <h2 class="detail-title">{{ editableRecipe.name }}</h2>
-    <p class="detail-description">{{ editableRecipe.description }}</p>
-
-    <h3>Ingredientes</h3>
-    <ul class="ingredients-list">
-      <li *ngFor="let ing of editableRecipe.ingredients">
-        {{ ing | formatIngredient }}
-      </li>
-    </ul>
-  </div>
-
-  <div *ngIf="editMode">
-    <input type="text" [(ngModel)]="editableRecipe.name" placeholder="Título" class="form-control" />
-    <textarea [(ngModel)]="editableRecipe.description" placeholder="Descripción" class="form-control"></textarea>
-    <input type="text" [(ngModel)]="editableRecipe.imagePath" placeholder="URL de imagen" class="form-control" />
-
-    <h3>Ingredientes</h3>
-    <div *ngFor="let ing of editableRecipe.ingredients; let i = index" class="ingredient-row">
-      <input [(ngModel)]="ing.name" placeholder="Ingrediente" class="form-control small" />
-      <input [(ngModel)]="ing.amount" type="number" placeholder="Cantidad" class="form-control tiny" />
-      <!-- <select [(ngModel)]="ing.unit" class="form-control tiny">
-        <option *ngFor="let unit of units" [value]="unit">{{ unit }}</option>
-      </select> -->
-      <button (click)="removeIngredient(i)" class="delete-btn">🗑</button>
+  
+      <ng-container *ngIf="editMode">
+        <button (click)="save()" class="action-button top-action">
+          💾 Guardar
+        </button>
+        <button (click)="cancelEdit()" class="action-button cancel">
+          ❌ Cancelar
+        </button>
+      </ng-container>
     </div>
-    <button (click)="addIngredient()" class="action-button">+ Ingrediente</button>
+  
+    <div class="image-container">
+      <img [src]="editableRecipe.imagePath" alt="Imagen de {{ editableRecipe.name }}" class="detail-image" />
+      <button class="favorite-btn" (click)="toggleFavorite()" appHeartAnimate>
+        {{ isFav ? '❤️' : '🤍' }}
+      </button>
+    </div>
+  
+    <div *ngIf="!editMode">
+      <h2 class="detail-title">{{ editableRecipe.name }}</h2>
+      <p class="detail-description">{{ editableRecipe.description }}</p>
+  
+      <h3>Ingredientes</h3>
+      <ul class="ingredients-list">
+        <li *ngFor="let ing of editableRecipe.ingredients">
+          {{ ing | formatIngredient }}
+        </li>
+      </ul>
+    </div>
+  
+    <div *ngIf="editMode">
+      <input type="text" [(ngModel)]="editableRecipe.name" placeholder="Título" class="form-control" />
+      <textarea [(ngModel)]="editableRecipe.description" placeholder="Descripción" class="form-control"></textarea>
+      <input type="text" [(ngModel)]="editableRecipe.imagePath" placeholder="URL de imagen" class="form-control" />
+  
+      <h3>Ingredientes</h3>
+      <div *ngFor="let ing of editableRecipe.ingredients; let i = index" class="ingredient-row">
+        <input [(ngModel)]="ing.name" placeholder="Ingrediente" class="form-control small" />
+        <input [(ngModel)]="ing.amount" type="number" placeholder="Cantidad" class="form-control tiny" />
+        <!-- <select [(ngModel)]="ing.unit" class="form-control tiny">
+          <option *ngFor="let unit of units" [value]="unit">{{ unit }}</option>
+        </select> -->
+        <button (click)="removeIngredient(i)" class="delete-btn">🗑</button>
+      </div>
+      <button (click)="addIngredient()" class="action-button">+ Ingrediente</button>
+    </div>
+  
+    <div class="buttons-row">
+      <a routerLink="/" class="back-button">← Volver</a>
+    </div>
   </div>
-
-  <div class="buttons-row">
-    <a routerLink="/" class="back-button">← Volver</a>
-  </div>
-</div>
+</ng-container>  

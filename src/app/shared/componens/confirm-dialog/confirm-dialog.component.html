@@ -1,0 +1,10 @@
+<h2 mat-dialog-title class="dialog-title">¿Cerrar sesión?</h2>
+
+<mat-dialog-content class="dialog-content">
+  <p>¿Estás seguro de que deseas cerrar sesión?</p>
+</mat-dialog-content>
+
+<mat-dialog-actions align="end" class="dialog-actions">
+  <button mat-button (click)="onCancel()">Cancelar</button>
+  <button mat-raised-button color="warn" (click)="onConfirm()">Cerrar sesión</button>
+</mat-dialog-actions>

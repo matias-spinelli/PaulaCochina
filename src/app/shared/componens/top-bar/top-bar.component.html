@@ -10,11 +10,10 @@
   
     <!-- Navegación -->
     <div class="nav-links" [class.open]="isMenuOpen">
-      <a href="#">Inicio</a>
-      <a href="#">Recetas</a>
+      <a routerLink="/recipes">📖 Recetas</a>
       <a routerLink="/ingredientes">🛒 Ingredientes</a>
       <a routerLink="/favoritos">❤️ Favoritos</a>
-      <a href="#">Perfil</a>
+      <a (click)="confirmLogout()" class="logout-link">🚪 Cerrar sesión</a>
     </div>
   </div>
   

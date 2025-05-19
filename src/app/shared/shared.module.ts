@@ -12,6 +12,11 @@ import { FormsModule } from '@angular/forms';
 import { RecipeNewComponent } from './componens/recipe-new/recipe-new.component';
 import { RecipeCardNewComponent } from './componens/recipe-card-new/recipe-card-new.component';
 import { RecipeSearchComponent } from './componens/recipe-search/recipe-search.component';
+import { LoadingSpinnerComponent } from './componens/loading-spinner/loading-spinner.component';
+import { ConfirmDialogComponent } from './componens/confirm-dialog/confirm-dialog.component';
+import { MatDialogModule } from '@angular/material/dialog';
+import { MatButtonModule } from '@angular/material/button';
+import { ConfirmDeleteRecipeDialogComponent } from './componens/confirm-delete-recipe-dialog/confirm-delete-recipe-dialog.component';
 
 @NgModule({
   declarations: [
@@ -25,11 +30,16 @@ import { RecipeSearchComponent } from './componens/recipe-search/recipe-search.c
     UnitLabelPipe,
     FormatIngredientPipe,
     HeartAnimateDirective,
+    LoadingSpinnerComponent,
+    ConfirmDialogComponent,
+    ConfirmDeleteRecipeDialogComponent
   ],
   imports: [
     CommonModule,
     RouterModule,
-    FormsModule
+    FormsModule,
+    MatDialogModule,
+    MatButtonModule
   ],
   exports: [
     TopBarComponent,
@@ -40,7 +50,8 @@ import { RecipeSearchComponent } from './componens/recipe-search/recipe-search.c
     RecipeSearchComponent,
     UnitLabelPipe,
     FormatIngredientPipe,
-    HeartAnimateDirective
+    HeartAnimateDirective,
+    LoadingSpinnerComponent
   ]
 })
 export class SharedModule { }

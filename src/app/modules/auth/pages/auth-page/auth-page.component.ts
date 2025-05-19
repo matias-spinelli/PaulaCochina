@@ -13,6 +13,7 @@ import { CookieService } from 'ngx-cookie-service';
 export class AuthPageComponent implements OnInit {
   authForm:FormGroup = new FormGroup({});
   isLoginMode = true;
+  isLoading = false;
 
   constructor(
     private authService: AuthServiceService, 
@@ -43,11 +44,10 @@ export class AuthPageComponent implements OnInit {
 
   sendLogin(): void {
     if (this.authForm.invalid) return;
+
+    this.isLoading = true;
+
     const { email, password } = this.authForm.value;
-
-    console.log('sendLogin');
-    console.log('isLoginMode', this.isLoginMode);
-
     const authObs = this.isLoginMode
       ? this.authService.login(email, password)
       : this.authService.register(email, password);
@@ -60,10 +60,10 @@ export class AuthPageComponent implements OnInit {
       },
       error: (err) => {
         /* this.errorSession = true, */
-        console.log('Ocurrio un error con tu email o password')
+        console.error('Ocurrio un error con tu email o password', err)
       },
       complete: () => {
-        console.log('complete');
+        this.isLoading = false;
       }
     });
   }

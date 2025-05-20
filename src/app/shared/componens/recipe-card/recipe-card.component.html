@@ -1,6 +1,6 @@
 <div class="recipe-card">
     <div class="image-container">
-        <img [src]="recipe.imagePath" alt="Imagen de receta" />
+        <img appImgBroken [customImg]="'assets/morron-azul.png'" [src]="recipe.imagePath" alt="Imagen de receta" />
         <button class="favorite-btn" (click)="toggleFavorite($event)" appHeartAnimate>
             {{ isFav ? '❤️' : '🤍' }}
         </button>

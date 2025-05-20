@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Recipe } from '@core/models/recipe.model';
 import { RecipesListType } from '@shared/componens/recipes-list/recipes-list-type.enum';
 import { RecipeService } from '@shared/services/recipe-service.service';
+import { finalize } from 'rxjs';
 
 @Component({
   selector: 'app-recipes-page',
@@ -19,16 +20,15 @@ export class RecipesPageComponent implements OnInit {
   constructor(private recipeService: RecipeService) {}
 
   ngOnInit(): void {
-    this.recipeService.getAllRecipes$().subscribe({
+    this.recipeService.getAllRecipes$()
+    .pipe(finalize(() => this.loading = false))
+    .subscribe({
       next: recipes => {
         this.allRecipes = recipes;
         this.filteredRecipes = recipes;
       },
       error: (err) => {
         console.error('Error al cargar las recetas:', err);
-      },
-      complete: () => {
-        this.loading = false;
       }
     });
   }

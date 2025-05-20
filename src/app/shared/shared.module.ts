@@ -17,6 +17,7 @@ import { ConfirmDialogComponent } from './componens/confirm-dialog/confirm-dialo
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatButtonModule } from '@angular/material/button';
 import { ConfirmDeleteRecipeDialogComponent } from './componens/confirm-delete-recipe-dialog/confirm-delete-recipe-dialog.component';
+import { ImgBrokenDirective } from './directives/img-broken.directive';
 
 @NgModule({
   declarations: [
@@ -30,6 +31,7 @@ import { ConfirmDeleteRecipeDialogComponent } from './componens/confirm-delete-r
     UnitLabelPipe,
     FormatIngredientPipe,
     HeartAnimateDirective,
+    ImgBrokenDirective,
     LoadingSpinnerComponent,
     ConfirmDialogComponent,
     ConfirmDeleteRecipeDialogComponent
@@ -51,6 +53,7 @@ import { ConfirmDeleteRecipeDialogComponent } from './componens/confirm-delete-r
     UnitLabelPipe,
     FormatIngredientPipe,
     HeartAnimateDirective,
+    ImgBrokenDirective,
     LoadingSpinnerComponent
   ]
 })

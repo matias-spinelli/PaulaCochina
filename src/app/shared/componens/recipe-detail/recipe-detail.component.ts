@@ -101,6 +101,7 @@ export class RecipeDetailComponent implements OnInit {
       if (confirmed && this.recipe?._id) {
         this.recipeService.deleteRecipe(this.recipe._id).subscribe({
           next: () => {
+            this.recipeService.removeFavorite(this.recipe);
             this.snackBar.open('Receta eliminada', 'Cerrar', { duration: 3000 });
             this.router.navigate(['/']);
           },

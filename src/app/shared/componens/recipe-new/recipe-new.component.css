@@ -32,6 +32,10 @@
   border: 1px solid #ccc;
 }
   
+.ingredient-title {
+  color: var(--orange-color);
+}
+
 .ingredient-row {
   display: flex;
   gap: 0.5rem;

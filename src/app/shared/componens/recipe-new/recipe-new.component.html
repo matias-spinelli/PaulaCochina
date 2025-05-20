@@ -8,7 +8,7 @@
     <textarea [(ngModel)]="recipe.description" placeholder="Descripción" class="form-control"></textarea>
     <input type="text" [(ngModel)]="recipe.imagePath" placeholder="URL de imagen" class="form-control" />
   
-    <h3>Ingredientes</h3>
+    <h3 class="ingredient-title">Ingredientes</h3>
     <div *ngFor="let ing of recipe.ingredients; let i = index" class="ingredient-row">
       <input [(ngModel)]="ing.name" placeholder="Ingrediente" class="form-control small" />
       <input [(ngModel)]="ing.amount" type="number" placeholder="Cantidad" class="form-control tiny" />

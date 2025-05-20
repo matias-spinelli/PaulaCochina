@@ -2,16 +2,18 @@
     max-width: 600px;
     margin: 2rem auto;
     padding: 2rem;
-    background-color: #fffdf6;
+    background-color: var(--card-bakckground-color);
     border-radius: 16px;
     box-shadow: 0 4px 10px rgba(0,0,0,0.1);
     text-align: center;
+    color: var(--orange-color);
   }
   
   .ingredients-list {
     list-style: none;
     padding: 0;
     text-align: left;
+    color: var(--orange-color);
   }
   
   .checkbox-item {
@@ -58,12 +60,12 @@
 }
 
 .back-button {
-  background-color: #3498db;
+  background-color: var(--blue-pepper);
   color: var(--color-white);
 }
 
 .restore-button {
-    background-color: #2ecc71;
+    background-color: var(--green-pepper);
     color: var(--color-white);
     border: none;
     padding: 0.5rem 1rem;

@@ -51,7 +51,6 @@ export class ShoppingListComponent implements OnInit {
       this.ingredients = JSON.parse(original);
       this.saveToStorage();
     } else {
-      // Si no hay lista guardada, regenerar desde las recetas originales
       this.initializeIngredients();
       alert('Lista original restaurada desde las recetas.');
     }
@@ -71,7 +70,6 @@ private initializeIngredients(): void {
   
     this.saveToStorage();
   
-    // Solo guardar la lista original si no está en localStorage
     if (!localStorage.getItem('shoppingListOriginal')) {
       try {
         localStorage.setItem('shoppingListOriginal', JSON.stringify(this.ingredients));

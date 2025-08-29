@@ -8,7 +8,7 @@ import { RouterModule } from '@angular/router';
 import { FormatIngredientPipe } from './pipe/format-ingredient.pipe';
 import { UnitLabelPipe } from './pipe/unit-label.pipe';
 import { HeartAnimateDirective } from './directives/heart-animate.directive';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RecipeNewComponent } from './componens/recipe-new/recipe-new.component';
 import { RecipeCardNewComponent } from './componens/recipe-card-new/recipe-card-new.component';
 import { RecipeSearchComponent } from './componens/recipe-search/recipe-search.component';
@@ -40,6 +40,7 @@ import { ImgBrokenDirective } from './directives/img-broken.directive';
     CommonModule,
     RouterModule,
     FormsModule,
+    ReactiveFormsModule,
     MatDialogModule,
     MatButtonModule
   ],

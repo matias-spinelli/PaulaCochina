@@ -3,6 +3,7 @@ import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms'
 import { Router } from '@angular/router';
 import { AuthServiceService } from '@modules/auth/services/auth-service.service';
 import { CookieService } from 'ngx-cookie-service';
+import { finalize } from 'rxjs';
 
 @Component({
   selector: 'app-auth-page',
@@ -14,6 +15,8 @@ export class AuthPageComponent implements OnInit {
   authForm:FormGroup = new FormGroup({});
   isLoginMode = true;
   isLoading = false;
+  serverError: string | null = null;
+  controlConfigs: { name: string; control: FormControl }[] = [];
 
   constructor(
     private authService: AuthServiceService, 
@@ -36,8 +39,21 @@ export class AuthPageComponent implements OnInit {
         ])
       }
     )
+
+    this.controlConfigs = [
+      { name: 'email', control: this.authForm.get('email') as FormControl },
+      { name: 'password', control: this.authForm.get('password') as FormControl },
+    ];
   }
   
+  get email() {
+    return this.authForm.get('email') as FormControl;
+  }
+  
+  get password() {
+    return this.authForm.get('password') as FormControl;
+  }
+
   onSwitchMode(): void {
     this.isLoginMode = !this.isLoginMode;
   }
@@ -45,6 +61,7 @@ export class AuthPageComponent implements OnInit {
   sendLogin(): void {
     if (this.authForm.invalid) return;
 
+    this.serverError = '';
     this.isLoading = true;
 
     const { email, password } = this.authForm.value;
@@ -52,18 +69,20 @@ export class AuthPageComponent implements OnInit {
       ? this.authService.login(email, password)
       : this.authService.register(email, password);
   
-    authObs.subscribe({
+    authObs
+    .pipe(finalize(() => this.isLoading = false))
+    .subscribe({
       next: (response) => {
-        const { idToken, data } = response
-        this.cookie.set('idToken', idToken, 4, '/')
+        const { idToken, expiresIn } = response
+        const expirationDate = new Date(new Date().getTime() + +expiresIn * 1000);
+
+        this.cookie.set('idToken', idToken, expirationDate, '/')
         this.router.navigate(['/', 'recipes'])
       },
       error: (err) => {
-        /* this.errorSession = true, */
         console.error('Ocurrio un error con tu email o password', err)
-      },
-      complete: () => {
-        this.isLoading = false;
+        const msg = err?.error?.errors?.[0]?.msg || 'Ocurrió un error inesperado.';
+        this.serverError = err?.error?.errors?.[0]?.msg || 'Error desconocido';
       }
     });
   }

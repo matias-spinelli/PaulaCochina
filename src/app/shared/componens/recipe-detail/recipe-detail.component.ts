@@ -7,6 +7,8 @@ import { trigger, transition, style, animate, keyframes } from '@angular/animati
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatDialog } from '@angular/material/dialog';
 import { ConfirmDeleteRecipeDialogComponent } from '../confirm-delete-recipe-dialog/confirm-delete-recipe-dialog.component';
+import { finalize } from 'rxjs';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-recipe-detail',
@@ -37,6 +39,7 @@ export class RecipeDetailComponent implements OnInit {
   editMode = false;
   //units = UNITS;
   loading = true;
+  recipeForm: FormGroup = new FormGroup({});
 
   constructor(
     private dialog: MatDialog,
@@ -48,23 +51,34 @@ export class RecipeDetailComponent implements OnInit {
 
   ngOnInit(): void {
     const id = String(this.route.snapshot.paramMap.get('id'));
-  
-    this.recipeService.getRecipeById$(id).subscribe({
+    this.recipeService.getRecipeById$(id)
+    .pipe(finalize(() => this.loading = false))
+    .subscribe({
       next: (recipe) => {
         if (recipe) {
           this.recipe = recipe;
           this.editableRecipe = structuredClone(this.recipe);
           this.originalRecipe = structuredClone(this.recipe);
           this.isFav = this.recipeService.isFavorite(id);
+
+          this.recipeForm = new FormGroup({
+              name: new FormControl(this.recipe.name, [
+              Validators.required,
+            ]),
+              description: new FormControl(this.recipe.description, [
+              Validators.required,
+              Validators.minLength(3),
+            ]),
+            imagePath: new FormControl(this.recipe.imagePath),
+          })
+
+
         } else {
           console.warn('Receta no encontrada');
         }
       },
       error: (err) => {
         console.error('Error al cargar la receta:', err);
-      },
-      complete: () => {
-        this.loading = false;
       }
     });
   }
@@ -82,6 +96,10 @@ export class RecipeDetailComponent implements OnInit {
 
   save(): void {
     if (this.recipe?._id) {
+      this.editableRecipe.name = this.recipeForm.value.name;
+      this.editableRecipe.description = this.recipeForm.value.description;
+      this.editableRecipe.imagePath = this.recipeForm.value.imagePath;
+
       this.recipeService.updateRecipe(this.recipe._id, this.editableRecipe).subscribe({
         next: (updated) => {
           this.recipe = updated;
@@ -125,5 +143,30 @@ export class RecipeDetailComponent implements OnInit {
 
   removeIngredient(index: number): void {
     this.editableRecipe.ingredients.splice(index, 1);
+  }
+
+  get name() {
+    return this.recipeForm.get('name')!;
+  }
+  
+  get description() {
+    return this.recipeForm.get('description')!;
+  }
+  
+  getNameError(): string {
+    if (this.name.hasError('required')) {
+      return 'El título es obligatorio';
+    }
+    return '';
+  }
+  
+  getDescriptionError(): string {
+    if (this.description.hasError('required')) {
+      return 'La descripción es obligatoria';
+    }
+    if (this.description.hasError('minlength')) {
+      return 'Debe tener al menos 3 caracteres';
+    }
+    return '';
   }
 }

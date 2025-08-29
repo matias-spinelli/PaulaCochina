@@ -1,13 +1,38 @@
 <div class="recipe-detail">
+  <form [formGroup]="recipeForm" (ngSubmit)="save()">
     <div class="top-bar">
-      <button (click)="save()" class="action-button top-action">💾 Guardar</button>
+      <button [disabled]="recipeForm.invalid" class="action-button top-action">💾 Guardar</button>
       <button routerLink="/" class="action-button cancel">❌ Cancelar</button>
     </div>
   
-    <input type="text" [(ngModel)]="recipe.name" placeholder="Título" class="form-control" />
-    <textarea [(ngModel)]="recipe.description" placeholder="Descripción" class="form-control"></textarea>
-    <input type="text" [(ngModel)]="recipe.imagePath" placeholder="URL de imagen" class="form-control" />
-  
+    <input
+      type="text"
+      formControlName="name"
+      placeholder="Título"
+      class="form-control"
+      [class.invalid]="name.invalid && name.touched"
+    />
+    <div *ngIf="name.invalid && name.touched" class="error-message">
+      {{ getNameError() }}
+    </div>
+
+    <textarea
+      formControlName="description"
+      placeholder="Descripción"
+      class="form-control"
+      [class.invalid]="description.invalid && description.touched">
+    </textarea>
+    <div *ngIf="description.invalid && description.touched" class="error-message">
+      {{ getDescriptionError() }}
+    </div>
+
+    <input
+      type="text"
+      formControlName="imagePath"
+      placeholder="URL de imagen"
+      class="form-control"
+    />
+
     <h3 class="ingredient-title">Ingredientes</h3>
     <div *ngFor="let ing of recipe.ingredients; let i = index" class="ingredient-row">
       <input [(ngModel)]="ing.name" placeholder="Ingrediente" class="form-control small" />
@@ -19,4 +44,5 @@
     </div>
   
     <button (click)="addIngredient()" class="action-button">+ Ingrediente</button>
-  </div>
+  </form>
+</div>

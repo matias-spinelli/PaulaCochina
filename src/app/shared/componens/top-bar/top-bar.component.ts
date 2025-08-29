@@ -1,8 +1,7 @@
 import { Component } from '@angular/core';
-import { Router } from '@angular/router';
-import { CookieService } from 'ngx-cookie-service';
 import { MatDialog } from '@angular/material/dialog';
 import { ConfirmDialogComponent } from '../confirm-dialog/confirm-dialog.component';
+import { AuthServiceService } from '@modules/auth/services/auth-service.service';
 
 @Component({
   selector: 'app-top-bar',
@@ -13,7 +12,7 @@ import { ConfirmDialogComponent } from '../confirm-dialog/confirm-dialog.compone
 export class TopBarComponent {
   isMenuOpen = false;
 
-  constructor(private cookie: CookieService, private router: Router, private dialog: MatDialog) { }
+  constructor(private authService: AuthServiceService, private dialog: MatDialog) { }
 
   toggleMenu() {
     this.isMenuOpen = !this.isMenuOpen;
@@ -28,7 +27,6 @@ export class TopBarComponent {
   }
     
   logout(): void {
-    this.cookie.delete('idToken', '/');
-    this.router.navigate(['/auth/login']);
+    this.authService.logout();
   }
 }

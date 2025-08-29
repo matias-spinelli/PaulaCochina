@@ -1,5 +1,5 @@
-<app-loading-spinner *ngIf="loading"></app-loading-spinner>
-<ng-container *ngIf="!loading">
+<app-loading-spinner *ngIf="isLoading"></app-loading-spinner>
+<ng-container *ngIf="!isLoading">
     <div class="recipes-page">
         <app-recipe-search (search)="onSearch($event)"></app-recipe-search>
         <app-recipes-list 

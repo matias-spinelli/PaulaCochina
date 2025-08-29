@@ -172,3 +172,13 @@
 .delete-action:hover {
   background-color: #c0392b;
 }
+
+.invalid {
+  border: 2px solid var(--red-pepper);
+}
+
+.error-message {
+  color: var(--red-pepper);
+  font-size: 0.9rem;
+  margin: 0.25rem 0 0.5rem;
+}

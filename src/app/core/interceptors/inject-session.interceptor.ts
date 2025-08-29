@@ -5,15 +5,12 @@ import {
 import { Observable, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 import { CookieService } from 'ngx-cookie-service';
-import { Router } from '@angular/router';
+import { AuthServiceService } from '@modules/auth/services/auth-service.service';
 
 @Injectable()
 export class InjectSessionInterceptor implements HttpInterceptor {
 
-  constructor(
-    private cookieService: CookieService,
-    private router: Router
-  ) { }
+  constructor(private cookieService: CookieService, private authService: AuthServiceService) { }
 
   intercept(request: HttpRequest<unknown>, next: HttpHandler): Observable<HttpEvent<unknown>> {
     try {
@@ -26,8 +23,7 @@ export class InjectSessionInterceptor implements HttpInterceptor {
         catchError((error: HttpErrorResponse) => {
           if (error.status === 401) {
             console.warn('🔐 Token vencido o inválido. Cerrando sesión...');
-            this.cookieService.delete('idToken');
-            this.router.navigate(['/auth/login']);
+            this.authService.logout();
           }
           return throwError(() => error);
         })

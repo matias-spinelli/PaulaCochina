@@ -15,13 +15,14 @@ export class RecipesPageComponent implements OnInit {
   searchTerm = '';
   filteredRecipes: Recipe[] = [];
   listTypes = RecipesListType;
-  loading = true;
+  isLoading = false;
 
   constructor(private recipeService: RecipeService) {}
 
   ngOnInit(): void {
+    this.isLoading = true;
     this.recipeService.getAllRecipes$()
-    .pipe(finalize(() => this.loading = false))
+    .pipe(finalize(() => this.isLoading = false))
     .subscribe({
       next: recipes => {
         this.allRecipes = recipes;
@@ -39,6 +40,6 @@ export class RecipesPageComponent implements OnInit {
   }
 
   removeFromFavorites(recipe: Recipe): void {
-
+    this.recipeService.toggleFavorite(recipe)
   }
 }

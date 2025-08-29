@@ -55,6 +55,7 @@
     border-radius: 8px;
     border: 1px solid #ccc;
     outline: none;
+    transition: border 0.2s, box-shadow 0.2s;
   }
   
   button[type="submit"] {
@@ -123,6 +124,11 @@
   box-sizing: border-box;
 }
   
+.input-error {
+  border: 1px solid var(--red-pepper);
+  background-color: #fff6f6;
+}
+
 /*   .social:hover {
     background-color: #f0f0f0;
   } */

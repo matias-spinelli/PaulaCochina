@@ -1,6 +1,6 @@
 <div class="page-container">
-    <ng-container *ngIf="recipes.length || showAddCard"; else showEmptyState>
-      <div class="recipes-grid">
+  <ng-container *ngIf="recipes.length || showAddCard; else showEmptyState">
+    <div class="recipes-grid">
         
         <app-recipe-card-new *ngIf="showAddCard"></app-recipe-card-new>
 

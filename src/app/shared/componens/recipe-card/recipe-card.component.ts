@@ -39,7 +39,7 @@ export class RecipeCardComponent {
 
   toggleFavorite(event: MouseEvent): void {
     event.stopPropagation();
-  
+
     const isNowFavorite = this.recipeService.toggleFavorite(this.recipe);
   
     if (!isNowFavorite) {

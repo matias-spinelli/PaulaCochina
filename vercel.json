@@ -1,11 +1,15 @@
 {
   "version": 2,
-  "buildCommand": "npm run build",
-  "outputDirectory": "dist/paula-cochina",
-  "routes": [
+  "public": true,
+  "builds": [
     {
-      "src": "/(.*)",
-      "dest": "/index.html"
+      "src": "angular.json",
+      "use": "@vercel/static-build",
+      "config": { "distDir": "dist/paula-cochina/browser" }
     }
+  ],
+  "routes": [
+    { "handle": "filesystem" },
+    { "src": "/.*", "dest": "/index.html" }
   ]
 }

@@ -14,9 +14,17 @@ export class InjectSessionInterceptor implements HttpInterceptor {
 
   intercept(request: HttpRequest<unknown>, next: HttpHandler): Observable<HttpEvent<unknown>> {
     try {
+      // Si es login o signup, no le metemos el token
+      if (request.url.includes('/api/auth/login') || request.url.includes('/api/auth/signup')) {
+        return next.handle(request);
+      }
+
       const token = this.cookieService.get('idToken');
+
       const newRequest = request.clone({
-        url: request.url.includes('?') ? `${request.url}&auth=${token}` : `${request.url}?auth=${token}`
+        url: request.url.includes('?')
+          ? `${request.url}&auth=${token}`
+          : `${request.url}?auth=${token}`
       });
 
       return next.handle(newRequest).pipe(
@@ -30,7 +38,7 @@ export class InjectSessionInterceptor implements HttpInterceptor {
       );
 
     } catch (e) {
-      console.log('🔴🔴🔴 Ojito error', e);
+      console.log('🔴 Ojito error en interceptor', e);
       return next.handle(request);
     }
   }

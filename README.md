@@ -1,4 +1,4 @@
-# PaulaCochia 🍲
+# PaulaCochina 🍲
 
 ![Angular](https://img.shields.io/badge/Angular-DD0031?style=for-the-badge&logo=angular&logoColor=white)
 ![TypeScript](https://img.shields.io/badge/TypeScript-3178C6?style=for-the-badge&logo=typescript&logoColor=white)
@@ -6,7 +6,7 @@
 ![License](https://img.shields.io/badge/License-MIT-yellow?style=for-the-badge)
 
 
-**PaulaCochia** es una aplicación web desarrollada en **Angular**
+**PaulaCochina** es una aplicación web desarrollada en **Angular**
 durante un curso práctico, con el objetivo de aprender y aplicar
 conceptos modernos de desarrollo frontend.\
 La app simula un recetario interactivo con funcionalidades de

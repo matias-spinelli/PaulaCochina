@@ -73,7 +73,7 @@ export class RecipeService {
   }
 
   getAllRecipes$(): Observable<Recipe[]> {
-    return this.http.get<Recipe[]>(`${this.apiUrl}/get`);
+    return this.http.get<Recipe[]>(`${this.apiUrl}`);
   }
 
   getRecipeById$(id: string): Observable<Recipe | undefined> {
@@ -127,15 +127,15 @@ export class RecipeService {
   }
   
   addRecipe(recipe: Recipe): Observable<Recipe> {
-    return this.http.post<Recipe>((`${this.apiUrl}/add`), recipe);
+    return this.http.post<Recipe>((`${this.apiUrl}`), recipe);
   }
 
   updateRecipe(id: string, recipe: Recipe): Observable<Recipe> {
-    return this.http.put<Recipe>(`${this.apiUrl}/edit/${id}`, recipe);
+    return this.http.put<Recipe>(`${this.apiUrl}/${id}`, recipe);
   }
 
   deleteRecipe(id: string): Observable<void> {
-    return this.http.delete<void>(`${this.apiUrl}/delete/${id}`);
+    return this.http.delete<void>(`${this.apiUrl}/${id}`);
   }
 
   filterRecipes(term: string, recipes: Recipe[]): Recipe[] {

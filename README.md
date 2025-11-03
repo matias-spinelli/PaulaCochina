@@ -75,6 +75,15 @@ ng serve -o
 
 ------------------------------------------------------------------------
 
+## ☁️ Deploy en Vercel
+
+El proyecto está deployado en Vercel y accesible públicamente en:
+
+👉 https://paula-cochina.vercel.app/
+
+
+------------------------------------------------------------------------
+
 ## 🌟 Créditos
 
 Proyecto creado por **Matías Spinelli**

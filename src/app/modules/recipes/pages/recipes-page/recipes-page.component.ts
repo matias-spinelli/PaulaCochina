@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Recipe } from '@core/models/recipe.model';
-import { RecipesListType } from '@shared/componens/recipes-list/recipes-list-type.enum';
+import { RecipesListType } from '@shared/components/recipes-list/recipes-list-type.enum';
 import { RecipeService } from '@shared/services/recipe-service.service';
 import { finalize } from 'rxjs';
 

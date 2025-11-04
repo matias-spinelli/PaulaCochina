@@ -1,8 +1,8 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { RecipesPageComponent } from './pages/recipes-page/recipes-page.component';
-import { RecipeDetailComponent } from '@shared/componens/recipe-detail/recipe-detail.component';
-import { RecipeNewComponent } from '@shared/componens/recipe-new/recipe-new.component';
+import { RecipeDetailComponent } from '@shared/components/recipe-detail/recipe-detail.component';
+import { RecipeNewComponent } from '@shared/components/recipe-new/recipe-new.component';
 
 const routes: Routes = [
   {

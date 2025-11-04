@@ -62,7 +62,7 @@
   transition: transform 0.2s ease, color 0.2s ease;
 }
 
-/* ✨ Animación de hover */
+/* ✨ Hover animado */
 .nav-links a:hover,
 .nav-links .logout-link:hover {
   color: var(--blue-pepper);
@@ -86,18 +86,37 @@
 .hamburger {
   display: none;
   flex-direction: column;
+  justify-content: center;
   cursor: pointer;
-  gap: 4px;
+  gap: 5px;
+  width: 30px;
+  height: 24px;
+  transition: transform 0.3s ease;
+  z-index: 2100; /* más alto que el menú */
 }
 
 .hamburger .bar {
-  width: 25px;
+  width: 100%;
   height: 3px;
-  background-color: var(--blue-pepper); /* 💙 color cambiado */
+  background-color: var(--blue-pepper);
   border-radius: 2px;
-  transition: background-color 0.3s ease, transform 0.2s ease;
+  transition: all 0.3s ease;
 }
 
+/* ✅ Cuando está activo → X */
+.hamburger.active .bar:nth-child(1) {
+  transform: translateY(8px) rotate(45deg);
+}
+
+.hamburger.active .bar:nth-child(2) {
+  opacity: 0;
+}
+
+.hamburger.active .bar:nth-child(3) {
+  transform: translateY(-8px) rotate(-45deg);
+}
+
+/* Hover sutil en el icono */
 .hamburger:hover .bar {
   transform: scaleX(1.1);
 }
@@ -108,10 +127,9 @@
     display: flex;
   }
 
-  /* 👇 ahora es fixed, no absolute */
   .nav-links {
     position: fixed;
-    top: 64px; /* justo debajo del top-bar */
+    top: 64px;
     left: 0;
     width: 100%;
     background-color: #fff8f0;
@@ -119,15 +137,27 @@
     align-items: center;
     gap: 1rem;
     padding: 1rem 0;
-    display: none;
-    z-index: 2001; /* más alto que la top-bar */
+    z-index: 2001;
     box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+    visibility: hidden;
+    opacity: 0;
+    pointer-events: none;
   }
 
-  /* ✨ animación drop-down con rebote */
+  /* 👇 Abre con rebote */
   .nav-links.open {
-    display: flex;
+    visibility: visible;
+    opacity: 1;
+    pointer-events: all;
     animation: dropdownBounce 0.35s ease-out forwards;
+  }
+
+  /* 👇 Cierra con rebote invertido */
+  .nav-links.closing {
+    visibility: visible;
+    opacity: 1;
+    pointer-events: none;
+    animation: dropdownBounceReverse 0.35s ease-in forwards;
   }
 
   .nav-links a {
@@ -135,7 +165,7 @@
   }
 }
 
-/* 🎉 Animación drop-down con rebote */
+/* 🎉 Abre con rebote (baja) */
 @keyframes dropdownBounce {
   0% {
     opacity: 0;
@@ -150,5 +180,24 @@
   }
   100% {
     transform: translateY(0);
+  }
+}
+
+/* 🔄 Cierra con rebote invertido (sube) */
+@keyframes dropdownBounceReverse {
+  0% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  20% {
+    transform: translateY(3px);
+  }
+  40% {
+    opacity: 1;
+    transform: translateY(-5px);
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(-15px);
   }
 }

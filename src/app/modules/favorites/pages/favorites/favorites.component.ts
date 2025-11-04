@@ -3,7 +3,7 @@ import { Recipe } from '@core/models/recipe.model';
 import { RecipeService } from '@shared/services/recipe-service.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { trigger, transition, style, animate } from '@angular/animations';
-import { RecipesListType } from '@shared/componens/recipes-list/recipes-list-type.enum';
+import { RecipesListType } from '@shared/components/recipes-list/recipes-list-type.enum';
 
 @Component({
   selector: 'app-favorites',

@@ -19,8 +19,11 @@
   .plus-icon {
     font-size: 48px;
     color: var(--blue-pepper);
+    width: 98px;
+    height: 98px;
+    object-fit: contain;
   }
-  
+
   .new-text {
     margin-top: 8px;
     font-size: 18px;

@@ -4,20 +4,25 @@
     <form [formGroup]="recipeForm">
       <div class="top-bar">
         <button *ngIf="!editMode" (click)="toggleEditMode()" class="action-button top-action">
-        ✏️ Editar
+          <img src="assets/icons/edit_icon.png" alt="Editar" class="icon" />
+          Editar
         </button>
         <button *ngIf="!editMode" (click)="onDelete()" class="action-button delete-action">
-        🗑️ Eliminar
+          <img src="assets/icons/delete_icon.png" alt="Eliminar" class="icon" />
+          Eliminar
         </button>
   
-        <ng-container *ngIf="editMode">
-          <button (click)="save()" [disabled]="recipeForm.invalid" class="action-button top-action">
-            💾 Guardar
-          </button>
-          <button (click)="cancelEdit()" class="action-button cancel">
-            ❌ Cancelar
-          </button>
-        </ng-container>
+      <ng-container *ngIf="editMode">
+        <button (click)="save()" [disabled]="recipeForm.invalid" class="action-button top-action">
+          <img src="assets/icons/save_icon.png" alt="Guardar" class="icon" />
+          Guardar
+        </button>
+
+        <button (click)="cancelEdit()" class="action-button cancel">
+          <img src="assets/icons/cancel_icon.png" alt="Cancelar" class="icon" />
+          Cancelar
+        </button>
+      </ng-container>
       </div>
   
       <div class="image-container">
@@ -86,13 +91,21 @@
           <!-- <select [(ngModel)]="ing.unit" class="form-control tiny">
             <option *ngFor="let unit of units" [value]="unit">{{ unit }}</option>
           </select> -->
-          <button (click)="removeIngredient(i)" class="delete-btn">🗑</button>
+          <button (click)="removeIngredient(i)" class="delete-btn">
+            <img src="assets/icons/delete_icon.png" alt="Eliminar ingrediente" class="icon small-icon" />
+          </button>
         </div>
-        <button (click)="addIngredient()" class="action-button">+ Ingrediente</button>
+        <button (click)="addIngredient()" class="action-button add">
+          <img src="assets/icons/add_icon.png" alt="Agregar ingrediente" class="icon" />
+          Ingrediente
+        </button>
       </div>
   
       <div class="buttons-row">
-        <a routerLink="/" class="back-button">← Volver</a>
+        <a routerLink="/" class="back-button">
+          <img src="assets/icons/back_icon.png" alt="Volver" class="icon" />
+          Volver
+        </a>
       </div>
     </form>
   </div>

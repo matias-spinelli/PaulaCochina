@@ -1,8 +1,15 @@
 <div class="recipe-detail">
   <form [formGroup]="recipeForm" (ngSubmit)="save()">
     <div class="top-bar">
-      <button [disabled]="recipeForm.invalid" class="action-button top-action">💾 Guardar</button>
-      <button routerLink="/" class="action-button cancel">❌ Cancelar</button>
+        <button (click)="save()" [disabled]="recipeForm.invalid" class="action-button top-action">
+          <img src="assets/icons/save_icon.png" alt="Guardar" class="icon" />
+          Guardar
+        </button>
+
+        <button routerLink="/" class="action-button cancel">
+          <img src="assets/icons/cancel_icon.png" alt="Cancelar" class="icon" />
+          Cancelar
+        </button>
     </div>
   
     <input
@@ -40,9 +47,13 @@
      <!--  <select [(ngModel)]="ing.unit" class="form-control tiny">
         <option *ngFor="let unit of units" [value]="unit">{{ unit }}</option>
       </select> -->
-      <button (click)="removeIngredient(i)" class="delete-btn">🗑</button>
+      <button (click)="removeIngredient(i)" class="delete-btn">
+        <img src="assets/icons/delete_icon.png" alt="Eliminar ingrediente" class="icon small-icon" />
+      </button>
     </div>
-  
-    <button (click)="addIngredient()" class="action-button">+ Ingrediente</button>
+    <button (click)="addIngredient()" class="action-button add">
+      <img src="assets/icons/add_icon.png" alt="Agregar ingrediente" class="icon" />
+      Ingrediente
+    </button>
   </form>
 </div>

@@ -59,9 +59,8 @@
 
 .detail-title {
   font-size: 2rem;
-  color: var(--orange-color);
+  color: var(--blue-pepper);
   margin-bottom: 1rem;
-  color: var(--blue-pepper)
 }
 
 .detail-description {
@@ -76,25 +75,7 @@
   max-width: 400px;
   padding-left: 1.5rem;
   list-style-type: disc;
-  color: var(--orange-color)
-}
-
-.back-button,
-.action-button {
-  background-color: #e67e22;
-  color: #fff;
-  padding: 0.5rem 1rem;
-  border-radius: 8px;
-  text-decoration: none;
-  font-weight: bold;
-  margin: 0.5rem;
-  border: none;
-  cursor: pointer;
-}
-
-.back-button:hover,
-.action-button:hover {
-  background-color: #cf711f;
+  color: var(--orange-color);
 }
 
 .form-control {
@@ -120,6 +101,7 @@
 .small {
   flex: 2;
 }
+
 .tiny {
   flex: 1;
 }
@@ -128,6 +110,7 @@
   margin-top: 1.5rem;
 }
 
+/* --- 🔸 Top action buttons --- */
 .top-bar {
   display: flex;
   justify-content: flex-end;
@@ -135,22 +118,59 @@
   margin-bottom: 1rem;
 }
 
-.top-action {
+.action-button,
+.back-button {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  border: none;
+  border-radius: 8px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: transform 0.15s ease, background-color 0.2s ease;
+  text-decoration: none;
+  font-family: inherit;
+}
+
+/* --- Botones de acción (guardar, cancelar, agregar) --- */
+.action-button {
+  background-color: #e67e22;
+  color: #fff;
+  padding: 0.5rem 1rem;
+}
+
+.action-button:hover {
+  background-color: #cf711f;
+  transform: translateY(-2px);
+}
+
+.action-button.top-action {
   background-color: #f39c12;
 }
 
-.top-action:hover {
+.action-button.top-action:hover {
   background-color: #d68910;
 }
 
-.cancel {
+.action-button.cancel {
   background-color: #aaa;
 }
 
-.cancel:hover {
+.action-button.cancel:hover {
   background-color: #888;
 }
 
+/* --- Botón agregar ingrediente --- */
+.action-button.add {
+  background-color: var(--blue-pepper);
+}
+
+.action-button.add:hover {
+  background-color: rgb(10, 12, 200); /* azul más oscuro */
+  transform: translateY(-2px);
+}
+
+/* --- Botón eliminar --- */
 .delete-btn {
   background: none;
   border: none;
@@ -158,19 +178,85 @@
   color: #e74c3c;
   cursor: pointer;
   padding: 0 0.5rem;
+  transition: transform 0.15s ease;
 }
 
 .delete-btn:hover {
   transform: scale(1.1);
 }
 
-/* 🔥 NUEVO estilo para el botón Eliminar en la top bar */
 .delete-action {
   background-color: #e74c3c;
 }
 
 .delete-action:hover {
   background-color: #c0392b;
+}
+
+/* --- Botón volver --- */
+.back-button {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  text-decoration: none;
+  color: #fff;
+  font-weight: bold;
+  background-color: #e67e22; /* naranja */
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 8px;
+  transition: background-color 0.2s ease, transform 0.15s ease;
+}
+
+.back-button:hover {
+  background-color: #cf711f; /* más oscuro */
+  transform: translateY(-2px);
+}
+
+.back-button .icon {
+  width: 20px;
+  height: 20px;
+  object-fit: contain;
+  filter: brightness(0) invert(1); /* ícono blanco */
+  transition: transform 0.15s ease, filter 0.15s ease;
+}
+
+.back-button:hover .icon {
+  transform: translateX(-2px);
+}
+
+/* --- Botón eliminar ingrediente --- */
+.delete-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0.25rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.15s ease, filter 0.15s ease;
+}
+
+.delete-btn:hover {
+  transform: scale(1.15);
+  filter: drop-shadow(0 0 3px rgba(231, 76, 60, 0.4));
+}
+
+/* ícono rojo de eliminar */
+.delete-btn .small-icon {
+  width: 20px;
+  height: 20px;
+  object-fit: contain;
+  filter: brightness(0) saturate(100%) invert(27%) sepia(91%) saturate(3420%) hue-rotate(347deg) brightness(95%) contrast(95%);
+}
+
+/* --- Íconos uniformes --- */
+.icon {
+  width: 20px;
+  height: 20px;
+  object-fit: contain;
+  filter: brightness(0) invert(1); /* blancos en botones naranjas o azules */
+  transition: transform 0.15s ease, filter 0.15s ease;
 }
 
 .invalid {

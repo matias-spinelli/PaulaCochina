@@ -15,7 +15,6 @@ export class TopBarComponent {
   constructor(private authService: AuthServiceService, private dialog: MatDialog) { }
 
   toggleMenu() {
-    console.log('🍔 toggleMenu ejecutado');
     this.isMenuOpen = !this.isMenuOpen;
   }
 

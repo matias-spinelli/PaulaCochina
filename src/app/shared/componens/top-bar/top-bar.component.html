@@ -1,19 +1,33 @@
 <div class="top-bar">
-    <div class="logo">Paula Cochina</div>
-  
-    <!-- Botón hamburguesa (visible en móviles) -->
-    <div class="hamburger" (click)="toggleMenu()">
-      <div class="bar"></div>
-      <div class="bar"></div>
-      <div class="bar"></div>
-    </div>
-  
-    <!-- Navegación -->
-    <div class="nav-links" [class.open]="isMenuOpen">
-      <a routerLink="/recipes">📖 Recetas</a>
-      <a routerLink="/ingredientes">🛒 Ingredientes</a>
-      <a routerLink="/favoritos">❤️ Favoritos</a>
-      <a (click)="confirmLogout()" class="logout-link">🚪 Cerrar sesión</a>
-    </div>
+  <div class="logo-container">
+    <div class="logo-text">Paula Cochina</div>
+    <img src="assets/morron-azul.png" alt="Logo" class="logo-img" />
   </div>
-  
+
+  <!-- Botón hamburguesa (visible en móviles) -->
+  <div class="hamburger" (click)="toggleMenu()">
+    <div class="bar"></div>
+    <div class="bar"></div>
+    <div class="bar"></div>
+  </div>
+
+  <!-- Navegación -->
+  <div class="nav-links" [class.open]="isMenuOpen">
+    <a routerLink="/recipes">
+      <img src="assets/recetas.png" alt="Recetas" class="nav-icon" />
+      <span>Recetas</span>
+    </a>
+    <a routerLink="/ingredientes">
+      <img src="assets/ingredientes.png" alt="Ingredientes" class="nav-icon" />
+      <span>Ingredientes</span>
+    </a>
+    <a routerLink="/favoritos">
+      <img src="assets/favoritos.png" alt="Favoritos" class="nav-icon" />
+      <span>Favoritos</span>
+    </a>
+    <a (click)="confirmLogout()" class="logout-link">
+      <img src="assets/logout.png" alt="Cerrar sesión" class="nav-icon" />
+      <span>Cerrar sesión</span>
+    </a>
+  </div>
+</div>

@@ -92,7 +92,7 @@
   width: 30px;
   height: 24px;
   transition: transform 0.3s ease;
-  z-index: 2100; /* más alto que el menú */
+  z-index: 2100;
 }
 
 .hamburger .bar {
@@ -139,24 +139,18 @@
     padding: 1rem 0;
     z-index: 2001;
     box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
-    visibility: hidden;
-    opacity: 0;
-    pointer-events: none;
+    display: none;
   }
 
   /* 👇 Abre con rebote */
   .nav-links.open {
-    visibility: visible;
-    opacity: 1;
-    pointer-events: all;
+    display: flex;
     animation: dropdownBounce 0.35s ease-out forwards;
   }
 
   /* 👇 Cierra con rebote invertido */
   .nav-links.closing {
-    visibility: visible;
-    opacity: 1;
-    pointer-events: none;
+    display: flex;
     animation: dropdownBounceReverse 0.35s ease-in forwards;
   }
 

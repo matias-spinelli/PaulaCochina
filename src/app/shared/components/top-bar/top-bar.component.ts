@@ -15,26 +15,9 @@ export class TopBarComponent {
   constructor(private authService: AuthServiceService, private dialog: MatDialog) { }
 
   toggleMenu() {
-    const menu = document.querySelector('.nav-links') as HTMLElement;
-    const burger = document.querySelector('.hamburger') as HTMLElement;
-
-    if (this.isMenuOpen) {
-      // cerrar menú con animación inversa
-      menu.classList.remove('open');
-      menu.classList.add('closing');
-      burger.classList.remove('active'); // 👈 vuelve a hamburguesa
-      setTimeout(() => {
-        menu.classList.remove('closing');
-        menu.style.visibility = 'hidden';
-        this.isMenuOpen = false;
-      }, 350);
-    } else {
-      // abrir menú con rebote
-      menu.style.visibility = 'visible';
-      menu.classList.add('open');
-      burger.classList.add('active'); // 👈 se convierte en X
-      this.isMenuOpen = true;
-    }
+    this.isMenuOpen = !this.isMenuOpen;
+    const burger = document.querySelector('.hamburger');
+    if (burger) burger.classList.toggle('active', this.isMenuOpen);
   }
 
   confirmLogout() {

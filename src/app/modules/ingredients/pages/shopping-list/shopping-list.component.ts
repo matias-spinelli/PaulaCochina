@@ -29,32 +29,32 @@ export class ShoppingListComponent implements OnInit {
     this.saveToStorage();
   }
 
-  removeChecked(): void {
-    const confirmRemove = confirm('¿Seguro querés borrar los ingredientes que ya marcaste?');
-    if (confirmRemove) {
-      this.ingredients = this.ingredients.filter(item => !item.checked);
-      this.saveToStorage();
-    }
-  }
+  // removeChecked(): void {
+  //   const confirmRemove = confirm('¿Seguro querés borrar los ingredientes que ya marcaste?');
+  //   if (confirmRemove) {
+  //     this.ingredients = this.ingredients.filter(item => !item.checked);
+  //     this.saveToStorage();
+  //   }
+  // }
 
-  resetList(): void {
-    const confirmReset = confirm('¿Querés limpiar toda la lista de ingredientes? Esta acción no se puede deshacer.');
-    if (confirmReset) {
-      this.ingredients.forEach(item => item.checked = false);
-      this.saveToStorage();
-    }
-  }
+  // resetList(): void {
+  //   const confirmReset = confirm('¿Querés limpiar toda la lista de ingredientes? Esta acción no se puede deshacer.');
+  //   if (confirmReset) {
+  //     this.ingredients.forEach(item => item.checked = false);
+  //     this.saveToStorage();
+  //   }
+  // }
 
-  restoreOriginal(): void {
-    const original = localStorage.getItem('shoppingListOriginal');
-    if (original) {
-      this.ingredients = JSON.parse(original);
-      this.saveToStorage();
-    } else {
-      this.initializeIngredients();
-      alert('Lista original restaurada desde las recetas.');
-    }
-  }
+  // restoreOriginal(): void {
+  //   const original = localStorage.getItem('shoppingListOriginal');
+  //   if (original) {
+  //     this.ingredients = JSON.parse(original);
+  //     this.saveToStorage();
+  //   } else {
+  //     this.initializeIngredients();
+  //     alert('Lista original restaurada desde las recetas.');
+  //   }
+  // }
 
 private initializeIngredients(): void {
     

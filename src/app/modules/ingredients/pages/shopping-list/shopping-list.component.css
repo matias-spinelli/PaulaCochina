@@ -6,7 +6,7 @@
     border-radius: 16px;
     box-shadow: 0 4px 10px rgba(0,0,0,0.1);
     text-align: center;
-    color: var(--orange-color);
+    color: var(--blue-pepper);
   }
   
   .ingredients-list {
@@ -37,12 +37,25 @@
     flex-wrap: wrap;
   }
 
+.title-icon {
+  width: 28px;
+  height: 28px;
+  object-fit: contain;
+  vertical-align: middle;
+}
+
 .reset-button,
 .back-button {
-  padding: 0.5rem 1rem;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  border: none;
   border-radius: 8px;
-  text-decoration: none;
   font-weight: bold;
+  cursor: pointer;
+  transition: transform 0.15s ease, background-color 0.2s ease;
+  text-decoration: none;
+  font-family: inherit;
 }
 
 .remove-checked-button {
@@ -59,9 +72,36 @@
     background-color: #d68910;
 }
 
+/* --- Botón volver --- */
 .back-button {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  text-decoration: none;
+  color: #fff;
+  font-weight: bold;
   background-color: var(--blue-pepper);
-  color: var(--color-white);
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 8px;
+  transition: background-color 0.2s ease, transform 0.15s ease;
+}
+
+.back-button:hover {
+  background-color: rgb(10, 12, 200); /* azul más oscuro */
+  transform: translateY(-2px);
+}
+
+.back-button .icon {
+  width: 20px;
+  height: 20px;
+  object-fit: contain;
+  filter: brightness(0) invert(1); /* ícono blanco */
+  transition: transform 0.15s ease, filter 0.15s ease;
+}
+
+.back-button:hover .icon {
+  transform: translateX(-2px);
 }
 
 .restore-button {
@@ -76,8 +116,4 @@
   
 .restore-button:hover {
     background-color: #27ae60;
-}
-
-.back-button:hover {
-  background-color: #217dbb;
 }

@@ -1,6 +1,9 @@
 <div class="shopping-list">
-    <h2>Lista de Ingredientes 🛒</h2>
-  
+  <h2>
+    Lista de Ingredientes
+    <img src="assets/ingredientes.png" alt="Ingredientes" class="title-icon" />
+  </h2>
+
     <ul class="ingredients-list">
       <li *ngFor="let item of ingredients; let i = index">
         <label class="checkbox-item">
@@ -11,10 +14,12 @@
     </ul>
 
     <div class="button-group">
-        <button class="reset-button" (click)="resetList()">🧼 Limpiar lista</button>
-        <button class="remove-checked-button" (click)="removeChecked()">🗑️ Borrar marcados</button>
-        <button class="restore-button" (click)="restoreOriginal()">🔁 Restaurar lista original</button>
-        <a routerLink="/" class="back-button">← Volver al inicio</a>
+        <!-- <button class="reset-button" (click)="resetList()">🧼 Limpiar lista</button> -->
+        <!-- <button class="remove-checked-button" (click)="removeChecked()">🗑️ Borrar marcados</button> -->
+        <!-- <button class="restore-button" (click)="restoreOriginal()">🔁 Restaurar lista original</button> -->
+        <a routerLink="/" class="back-button">
+          <img src="assets/icons/back_icon.png" alt="Volver" class="icon" />
+          Volver al inicio</a>
     </div>
 
   </div>

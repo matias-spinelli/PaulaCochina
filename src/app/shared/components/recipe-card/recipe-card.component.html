@@ -2,7 +2,10 @@
     <div class="image-container">
         <img appImgBroken [customImg]="'assets/morron-azul.png'" [src]="recipe.imagePath" alt="Imagen de receta" />
         <button class="favorite-btn" (click)="toggleFavorite($event)" appHeartAnimate>
-            {{ isFav ? '❤️' : '🤍' }}
+        <img 
+            [src]="isFav ? 'assets/icons/heart_filled.png' : 'assets/icons/heart_outline.png'" 
+            alt="Favorito" 
+        />
         </button>
     </div>
     <h3>{{ recipe.name }}</h3>
